@@ -8,7 +8,12 @@ namespace Entities
 {
 	public partial class Role
 	{
-		public int Id { get; set; }
-		public string Name { get; set; }
+		// navigation property for Entity Framework
+		public Role()
+		{
+			this.UsersInRole = new List<User>();
+		}
+
+		public virtual ICollection<User> UsersInRole { get; set; }
 	}
 }

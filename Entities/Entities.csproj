@@ -42,6 +42,17 @@
     <Compile Include="AlbumComment.cs" />
     <Compile Include="AlbumTag.cs" />
     <Compile Include="Comment.cs" />
+    <Compile Include="EFAlbumComment.cs" />
+    <Compile Include="EFAlbumTag.cs" />
+    <Compile Include="EFPhone.cs" />
+    <Compile Include="EFPhoto.cs" />
+    <Compile Include="EFPhotoAlbum.cs" />
+    <Compile Include="EFPhotoComment.cs" />
+    <Compile Include="EFRole.cs" />
+    <Compile Include="EFUser.cs" />
+    <Compile Include="IAlbumRepository.cs" />
+    <Compile Include="IPhotoRepository.cs" />
+    <Compile Include="IUserRepository.cs" />
     <Compile Include="Phone.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="PhotoAlbum.cs" />

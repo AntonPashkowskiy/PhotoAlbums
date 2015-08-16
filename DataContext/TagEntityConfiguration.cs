@@ -22,8 +22,7 @@ namespace DataContext
 				.HasMaxLength(20)
 				.HasColumnAnnotation(
 						IndexAnnotation.AnnotationName,
-						new IndexAnnotation(
-							new IndexAttribute("IX_TagName") { IsUnique = true })
+						new IndexAnnotation(new IndexAttribute("IX_TagName") { IsUnique = true })
 				)
 				.IsRequired();	
 		}

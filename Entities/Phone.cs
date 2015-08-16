@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-	public class Phone
+	public partial class Phone
 	{
 		public int Id { get; set; }
 		public string PhoneNumber { get; set; }
 		public bool IsHidden { get; set; }
-
-		public virtual User PhoneUser { get; set; }
 	}
 }

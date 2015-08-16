@@ -8,7 +8,12 @@ namespace Entities
 {
 	public partial class AlbumTag
 	{
-		public int Id { get; set; }
-		public string TagName { get; set; }
+		// navigation property for Entity Framework
+		public AlbumTag()
+		{
+			this.Albums = new List<PhotoAlbum>();
+		}
+
+		public virtual ICollection<PhotoAlbum> Albums { get; set; }
 	}
 }

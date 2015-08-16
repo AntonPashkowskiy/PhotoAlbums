@@ -10,7 +10,7 @@ namespace DataContext
 {
 	class PhotoAlbumsContext : DbContext
 	{
-		public PhotoAlbumsContext(string connectionName) : base(connectionName) 
+		public PhotoAlbumsContext(string connectionString) : base(connectionString) 
 		{
 			Database.SetInitializer(new PhotoAlbumsDbInitializer());
 		}

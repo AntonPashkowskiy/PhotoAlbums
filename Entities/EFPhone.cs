@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-	public partial class AlbumComment : Comment
+	public partial class Phone
 	{
-		public int AlbumId { get; set; }
-		public int AuthorId { get; set; }
+		// navigation property for Entity Framework
+		public virtual User PhoneUser { get; set; }
 	}
 }

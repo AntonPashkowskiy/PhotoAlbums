@@ -16,6 +16,10 @@ namespace DataContext
 
 			this.HasKey<int>(a => a.Id);
 
+			this.Property(a => a.Name)
+				.HasMaxLength(40)
+				.IsRequired();
+
 			this.Property(a => a.Description)
 				.HasColumnType("ntext");
 
