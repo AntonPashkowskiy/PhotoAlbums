@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-	public interface IAlbumRepository
+	public interface IAlbumRepository : IDisposable
 	{
 		bool AddAlbum(PhotoAlbum album);
 		bool UpdateAlbum(PhotoAlbum album);
@@ -27,7 +27,7 @@ namespace Entities
 		PhotoAlbum GetAlbum(int albumId);
 		PhotoAlbum GetAlbum(string albumName, int userId);
 		IEnumerable<PhotoAlbum> GetAlbums(int userId);
-		IEnumerable<PhotoAlbum> GetAlbums(AlbumTag[] tags);
+		IEnumerable<PhotoAlbum> GetAlbums(AlbumTag tag);
 
 		// Album statistic
 		int CountAlbums(int userId);

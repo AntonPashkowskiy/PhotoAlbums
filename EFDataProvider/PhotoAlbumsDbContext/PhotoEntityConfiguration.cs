@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 
-namespace DataContext
+namespace EFDataProvider
 {
 	class PhotoEntityConfiguration : EntityTypeConfiguration<Photo>
 	{

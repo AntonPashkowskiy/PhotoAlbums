@@ -8,7 +8,7 @@ using Entities;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataContext
+namespace EFDataProvider
 {
 	class UserEntityConfiguration : EntityTypeConfiguration<User>
 	{

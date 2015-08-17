@@ -8,26 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 
-namespace DataContext
+namespace EFDataProvider
 {
-	class PhoneEntityConfiguration : EntityTypeConfiguration<Phone>
+	class TagEntityConfiguration : EntityTypeConfiguration<AlbumTag>
 	{
-		public PhoneEntityConfiguration()
+		public TagEntityConfiguration()
 		{
-			this.ToTable("Phone");
+			this.ToTable("Tag");
 
-			this.HasKey<int>(p => p.Id);
+			this.HasKey<int>(t => t.Id);
 
-			this.Property(p => p.PhoneNumber)
+			this.Property(t => t.TagName)
 				.HasMaxLength(20)
 				.HasColumnAnnotation(
 						IndexAnnotation.AnnotationName,
-						new IndexAnnotation(new IndexAttribute("IX_PhoneNumber") { IsUnique = true })
+						new IndexAnnotation(new IndexAttribute("IX_TagName") { IsUnique = true })
 				)
-				.IsRequired();
-
-			this.Property(p => p.IsHidden)
-				.IsRequired();
+				.IsRequired();	
 		}
 	}
 }

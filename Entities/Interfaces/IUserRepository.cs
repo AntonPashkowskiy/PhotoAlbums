@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-	public interface IUserRepository
+	public interface IUserRepository : IDisposable
 	{
 		bool AddUser(User user);
 		bool UpdateUser(User user);

@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 
-namespace DataContext
+namespace EFDataProvider
 {
-	class AlbumCommentEntityConfiguration : EntityTypeConfiguration<AlbumComment>
+	class PhotoCommentEntityConfiguration : EntityTypeConfiguration<PhotoComment>
 	{
-		public AlbumCommentEntityConfiguration()
+		public PhotoCommentEntityConfiguration()
 		{
-			this.ToTable("AlbumComment");
+			this.ToTable("PhotoComment");
 
 			this.HasKey<int>(c => c.Id);
 

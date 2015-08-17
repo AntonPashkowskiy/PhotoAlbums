@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{82F14580-29EB-425B-98B3-EA8E6C977D15}</ProjectGuid>
+    <ProjectGuid>{41BAA578-8F57-4FC3-8EFD-D2D408EB4B79}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Entities</RootNamespace>
-    <AssemblyName>Entities</AssemblyName>
+    <RootNamespace>ServiceLayer</RootNamespace>
+    <AssemblyName>ServiceLayer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,29 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\AlbumComment.cs" />
-    <Compile Include="Entities\AlbumTag.cs" />
-    <Compile Include="Entities\Comment.cs" />
-    <Compile Include="EFEntities\EFAlbumComment.cs" />
-    <Compile Include="EFEntities\EFAlbumTag.cs" />
-    <Compile Include="EFEntities\EFPhone.cs" />
-    <Compile Include="EFEntities\EFPhoto.cs" />
-    <Compile Include="EFEntities\EFPhotoAlbum.cs" />
-    <Compile Include="EFEntities\EFPhotoComment.cs" />
-    <Compile Include="EFEntities\EFRole.cs" />
-    <Compile Include="EFEntities\EFUser.cs" />
-    <Compile Include="Interfaces\IAlbumRepository.cs" />
-    <Compile Include="Interfaces\IPhotoRepository.cs" />
-    <Compile Include="Interfaces\IUserRepository.cs" />
-    <Compile Include="Entities\Phone.cs" />
-    <Compile Include="Entities\Photo.cs" />
-    <Compile Include="Entities\PhotoAlbum.cs" />
-    <Compile Include="Entities\PhotoComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\User.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
