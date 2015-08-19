@@ -49,7 +49,9 @@ namespace EFDataProvider
 
 		public bool AddTagToAlbum(PhotoAlbum album, AlbumTag tag)
 		{
-			AlbumTag tagFound = _dbContext.AlbumTags.Where(t => t.TagName == tag.TagName).FirstOrDefault();
+			AlbumTag tagFound = _dbContext.AlbumTags
+				.Where(t => t.TagName == tag.TagName)
+				.FirstOrDefault();
 			PhotoAlbum albumFound = _dbContext.PhotoAlbums.Find(album.Id);
 
 			if (albumFound == null)

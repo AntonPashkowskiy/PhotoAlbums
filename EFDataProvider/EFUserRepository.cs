@@ -104,12 +104,19 @@ namespace EFDataProvider
 
 		public User GetUser(string login)
 		{
-			return _dbContext.Users.Where(u => u.Login == login).FirstOrDefault();
+			return _dbContext.Users
+				.Where(u => u.Login == login)
+				.Include(u => u.UserRoles)
+				.Include(u => u.Phone)
+				.FirstOrDefault();
 		}
 
 		public User GetUser(int userId)
 		{
-			return _dbContext.Users.Find(userId);
+			return _dbContext.Users.Where(u => u.Id == userId)
+				.Include(u => u.UserRoles)
+				.Include(u => u.Phone)
+				.FirstOrDefault();
 		}
 
 		public IEnumerable<User> GetUsers(string job)
@@ -122,12 +129,15 @@ namespace EFDataProvider
 			return _dbContext.Users.Where(u => 
 				String.Equals(u.FirstName, firstName, StringComparison.OrdinalIgnoreCase) &&
 				String.Equals(u.LastName, lastName, StringComparison.OrdinalIgnoreCase)
-			);
+			)
+			.Include(u => u.Phone);
 		}
 
 		public IEnumerable<User> GetUsers(Role role)
 		{
-			Role result = _dbContext.Roles.Where(r => r.Name == role.Name).FirstOrDefault();
+			Role result = _dbContext.Roles
+				.Where(r => r.Name == role.Name)
+				.FirstOrDefault();
 
 			return result == null ? null : result.UsersInRole;
 		}
@@ -138,7 +148,9 @@ namespace EFDataProvider
 
 			if (user != null && user.UserRoles != null)
 			{
-				Role roleFound = user.UserRoles.Where(r => r.Name == role.Name).FirstOrDefault();
+				Role roleFound = user.UserRoles
+					.Where(r => r.Name == role.Name)
+					.FirstOrDefault();
 						
 				if (roleFound != null)
 				{
@@ -169,7 +181,9 @@ namespace EFDataProvider
 
 		public bool RestoreUser(string userLogin)
 		{
-			User user = _dbContext.Users.Where(u => u.Login == userLogin).FirstOrDefault();
+			User user = _dbContext.Users
+				.Where(u => u.Login == userLogin)
+				.FirstOrDefault();
 
 			if (user != null)
 			{

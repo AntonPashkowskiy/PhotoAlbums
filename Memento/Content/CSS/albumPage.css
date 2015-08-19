@@ -1,0 +1,16 @@
+﻿.albums-area {
+    box-sizing: border-box;
+}
+
+.album {
+    margin: 5px;
+}
+
+.tags-area {
+    margin-bottom: 5px;
+}
+
+.add-button:before {
+    content: '+ ';
+}
+

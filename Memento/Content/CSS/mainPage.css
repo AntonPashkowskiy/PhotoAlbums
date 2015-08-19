@@ -1,0 +1,23 @@
+﻿.avatar-area {
+    padding-top: 10px;
+
+    background-color: #c6c9ca;
+}
+
+.user-info {
+    display: inline-block;
+}
+
+.publications-list {
+    padding: 10px;
+}
+
+.publication {
+    display: inline-block;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+
+.view-more-area {
+    text-align: center;
+}

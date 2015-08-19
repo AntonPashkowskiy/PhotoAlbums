@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Albums";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2">
+        <img src="~/Content/Images/default-avatar.png" class="user-avatar img-responsive img-circle" alt="no image" />
+        <div class="text-center">
+            @Html.ActionLink("Add new album", "CreateAlbum", null, new { @class = "add-button btn btn-primary btn-xs" })
+        </div>
+    </div>
+    <div class="albums-area col-md-10">
+        <h1 class="page-header">Your albums</h1>
+        <ul class="list-inline">
+            <li class="album thumbnail col-md-3">
+                <ul class="tags-area list-inline">
+                    <li>
+                        <span class="label label-primary">Nature</span>
+                    </li>
+                    <li>
+                        <span class="label label-primary">Lake</span>
+                    </li>
+                    <li>
+                        <span class="label label-primary">Mountings</span>
+                    </li>
+                </ul>
+                <img src="~/Content/Images/footer-nature.jpg" class="img-responsive" alt="no-image"/>
+                <div class="caption">
+                    <h4>Album Name</h4>
+                    <p>The great album description. Some text of description.</p>
+                    <button class="btn btn-primary">View more</button>
+                    <button class="btn btn-default">Delete</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
