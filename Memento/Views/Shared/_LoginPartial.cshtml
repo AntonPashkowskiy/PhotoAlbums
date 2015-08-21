@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Memento.Models
 
 @if (Request.IsAuthenticated)
 {
@@ -8,7 +9,7 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @(Html.ActionLink("Hello " + ((CurrentUser)Session["CurrentUser"]).Login + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" }))
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

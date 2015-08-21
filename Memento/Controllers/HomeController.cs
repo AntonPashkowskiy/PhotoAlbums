@@ -11,6 +11,8 @@ namespace Memento.Controllers
 	{
 		public ActionResult Index()
 		{
+			Session["CurrentUser"] = new CurrentUser();
+
 			return View();
 		}
 
@@ -24,6 +26,7 @@ namespace Memento.Controllers
 			return View();
 		}
 		
+		// GET /Home/PersonalRoom
 		[HttpGet]
 		public ActionResult PersonalRoom()
 		{
@@ -36,44 +39,25 @@ namespace Memento.Controllers
 				NumberOfAlbums = 4,
 				NumberOfPhotos = 5,
 				OverallAlbumsRating = 4,
-				OverallPhotosRating = 5,
-				PhoneNumber = ""
+				OverallPhotosRating = 5
 			};
 			return View(model);
 		}
 
+		// POST /Home/PersonalRoom
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult PersonalRoom(PersonalRoomViewModel model)
 		{
-			model.PhoneNumber = "";
 			return View(model);
 		}
 
+		// GET /Home/Albums
 		public ActionResult Albums()
 		{
 			return View();
 		}
 		
-		[HttpGet]
-		public ActionResult CreateAlbum(string returnUrl)
-		{
-			ViewBag.ReturnUrl = returnUrl;
-			return View();
-		}
-
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult CreateAlbum(CreateAlbumViewModel model)
-		{
-			if (ModelState.IsValid)
-			{
-
-			}
-
-			return View(model);
-		}
-
 		#region Helpers
 		#endregion
 	}

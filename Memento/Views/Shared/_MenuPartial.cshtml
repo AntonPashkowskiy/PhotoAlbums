@@ -3,6 +3,8 @@
     @if (Request.IsAuthenticated)
     {
         <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("Personal room", "PersonalRoom", "Home")</li>
+        <li>@Html.ActionLink("Albums", "Albums", "Home")</li>
         <li>@Html.ActionLink("About", "About", "Home")</li>
         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
     }

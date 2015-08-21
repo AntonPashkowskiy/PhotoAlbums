@@ -1,13 +1,16 @@
-﻿@{
+﻿@using Memento.Models
+
+@{
     ViewBag.Title = "Albums";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentUser = (CurrentUser)Session["CurrentUser"];
 }
 
 <div class="row">
     <div class="col-md-2">
-        <img src="~/Content/Images/default-avatar.png" class="user-avatar img-responsive img-circle" alt="no image" />
+        <img src="@Url.Content(currentUser.PhotoUrl)" class="user-avatar img-responsive img-circle" alt="no image" />
         <div class="text-center">
-            @Html.ActionLink("Add new album", "CreateAlbum", null, new { @class = "add-button btn btn-primary btn-xs" })
+            @Html.ActionLink("Add new album", "CreateAlbum", "Manage", null, new { @class = "add-button btn btn-primary btn-xs" })
         </div>
     </div>
     <div class="albums-area col-md-10">

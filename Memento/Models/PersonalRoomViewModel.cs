@@ -24,12 +24,5 @@ namespace Memento.Models
 
 		[Display(Name = "Overall photos rating")]
 		public int OverallPhotosRating { get; set; }
-
-		[DataType(DataType.PhoneNumber)]
-		[Display(Name = "Phone number")]
-		public string PhoneNumber { get; set; }
-
-		[Display(Name = "Hide phone number?")]
-		public bool IsHidden { get; set; }
 	}
 }
