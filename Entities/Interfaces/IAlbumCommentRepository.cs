@@ -7,8 +7,7 @@ using Entities;
 
 namespace Entities.Interfaces
 {
-	public interface IUserRepository
+	public interface IAlbumCommentRepository : IRepository<AlbumComment>
 	{
-		void Add(User item);
 	}
 }

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities;
 
-namespace Entities
+namespace Entities.Interfaces
 {
-	public partial class Role
+	public interface IPhotoCommentRepository : IRepository<PhotoComment> 
 	{
-		public int Id { get; set; }
-		public string Name { get; set; }
 	}
 }

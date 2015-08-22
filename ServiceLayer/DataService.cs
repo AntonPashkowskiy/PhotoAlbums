@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities;
 
-namespace Entities.Interfaces
+namespace ServiceLayer
 {
-	public interface IUserRepository
+	class DataService : IDataService
 	{
-		void Add(User item);
 	}
 }

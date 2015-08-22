@@ -44,22 +44,23 @@
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="EFEntities\EFAlbumComment.cs" />
     <Compile Include="EFEntities\EFAlbumTag.cs" />
-    <Compile Include="EFEntities\EFPhone.cs" />
     <Compile Include="EFEntities\EFPhoto.cs" />
     <Compile Include="EFEntities\EFPhotoAlbum.cs" />
     <Compile Include="EFEntities\EFPhotoComment.cs" />
-    <Compile Include="EFEntities\EFRole.cs" />
     <Compile Include="EFEntities\EFUser.cs" />
-    <Compile Include="Interfaces\IAlbumRepository.cs" />
-    <Compile Include="Interfaces\IPhotoRepository.cs" />
-    <Compile Include="Interfaces\IUserRepository.cs" />
-    <Compile Include="Entities\Phone.cs" />
     <Compile Include="Entities\Photo.cs" />
     <Compile Include="Entities\PhotoAlbum.cs" />
     <Compile Include="Entities\PhotoComment.cs" />
+    <Compile Include="Interfaces\IAlbumCommentRepository.cs" />
+    <Compile Include="Interfaces\IAlbumRepository.cs" />
+    <Compile Include="Interfaces\IPhotoCommentRepository.cs" />
+    <Compile Include="Interfaces\IPhotoRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserStatistic.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

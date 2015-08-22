@@ -9,13 +9,6 @@ namespace Entities
 	public partial class PhotoAlbum
 	{
 		// navigation properties for Entity Framework
-		public PhotoAlbum()
-		{
-			this.Tags = new List<AlbumTag>();
-			this.Photo = new List<Photo>();
-			this.Comments = new List<AlbumComment>();
-		}
-
 		public virtual User AlbumUser { get; set; }
 		public virtual ICollection<AlbumTag> Tags { get; set; }
 		public virtual ICollection<Photo> Photo { get; set; }

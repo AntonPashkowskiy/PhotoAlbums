@@ -3,29 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities;
 
-namespace Entities
+namespace Entities.Interfaces
 {
-	public interface IPhotoRepository : IDisposable
+	public interface IPhotoRepository : IRepository<Photo>
 	{
-		bool AddPhoto(Photo photo);
-		bool UpdatePhoto(Photo photo);
-		bool DeletePhoto(int photoId);
-
-		// Work with comments of photo
-		bool AddComment(PhotoComment comment);
-		bool DeleteComment(PhotoComment comment);
-		bool UpdateComment(PhotoComment comment);
-		IEnumerable<PhotoComment> GetComments(int photoId);
-
-		// Get-methods with different parameters
-		Photo GetPhoto(int photoId);
-		IEnumerable<Photo> GetPhotos(int userId);
-		IEnumerable<Photo> GetPhotosFromAlbum(int albumId);
-
-		// Photos statistic
-		int CountPhotosByUser(int userId);
-		int CountPhotosInAlbum(int albumId);
-		int OverallRatingForPhotos(int userId);
+		IEnumerable<Photo> GetPhotos(string userId, int pageNumber, int pageSize);
+		int NumberOfPhotos(string userId);
+		int OverallRatingForPhotos(string userId);
 	}
 }

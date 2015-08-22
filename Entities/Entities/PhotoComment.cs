@@ -9,6 +9,6 @@ namespace Entities
 	public partial class PhotoComment : Comment
 	{
 		public int PhotoId { get; set; }
-		public int AuthorId { get; set; }
+		public string AuthorId { get; set; }
 	}
 }

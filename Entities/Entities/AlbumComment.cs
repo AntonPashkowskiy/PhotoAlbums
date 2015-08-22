@@ -9,6 +9,6 @@ namespace Entities
 	public partial class AlbumComment : Comment
 	{
 		public int AlbumId { get; set; }
-		public int AuthorId { get; set; }
+		public string AuthorId { get; set; }
 	}
 }

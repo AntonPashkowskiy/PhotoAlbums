@@ -16,8 +16,6 @@ namespace EFDataProvider
 		}
 
 		public DbSet<User> Users { get; set; }
-		public DbSet<Role> Roles { get; set; }
-		public DbSet<Phone> Phones { get; set; }
 		public DbSet<PhotoAlbum> PhotoAlbums { get; set; }
 		public DbSet<AlbumTag> AlbumTags { get; set; }
 		public DbSet<Photo> Photo { get; set; }
@@ -27,8 +25,6 @@ namespace EFDataProvider
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Configurations.Add(new UserEntityConfiguration());
-			modelBuilder.Configurations.Add(new RoleEntiryConfiguration());
-			modelBuilder.Configurations.Add(new PhoneEntityConfiguration());
 			modelBuilder.Configurations.Add(new AlbumEntityConfiguration());
 			modelBuilder.Configurations.Add(new TagEntityConfiguration());
 			modelBuilder.Configurations.Add(new PhotoEntityConfiguration());

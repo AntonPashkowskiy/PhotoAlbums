@@ -51,20 +51,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EFAlbumRepository.cs" />
-    <Compile Include="EFPhotoRepository.cs" />
-    <Compile Include="EFUserRepository.cs" />
     <Compile Include="PhotoAlbumsDbContext\AlbumCommentEntityConfiguration.cs" />
     <Compile Include="PhotoAlbumsDbContext\AlbumEntityConfiguration.cs" />
-    <Compile Include="PhotoAlbumsDbContext\PhoneEntityConfiguration.cs" />
     <Compile Include="PhotoAlbumsDbContext\PhotoAlbumsContext.cs" />
     <Compile Include="PhotoAlbumsDbContext\PhotoAlbumsDbInitializer.cs" />
     <Compile Include="PhotoAlbumsDbContext\PhotoCommentEntityConfiguration.cs" />
     <Compile Include="PhotoAlbumsDbContext\PhotoEntityConfiguration.cs" />
-    <Compile Include="PhotoAlbumsDbContext\RoleEntiryConfiguration.cs" />
     <Compile Include="PhotoAlbumsDbContext\TagEntityConfiguration.cs" />
     <Compile Include="PhotoAlbumsDbContext\UserEntityConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Realization\EFAlbumCommentRepository.cs" />
+    <Compile Include="Realization\EFAlbumRepository.cs" />
+    <Compile Include="Realization\EFPhotoCommentRepository.cs" />
+    <Compile Include="Realization\EFPhotoRepository.cs" />
+    <Compile Include="Realization\EFRepository.cs" />
+    <Compile Include="Realization\EFUnitOfWork.cs" />
+    <Compile Include="Realization\EFUserRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
