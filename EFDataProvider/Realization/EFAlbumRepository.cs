@@ -13,6 +13,21 @@ namespace EFDataProvider.Realization
 	{
 		public EFAlbumRepository(PhotoAlbumsContext context) : base(context) {}
 
+		public void AddAlbum(PhotoAlbum item, IEnumerable<AlbumTag> tags)
+		{
+			if (item == null)
+			{
+				throw new ArgumentNullException("Item can't be null");
+			}
+
+			if (tags != null)
+			{
+				AddTagsToContext(tags);
+				item.Tags = (ICollection<AlbumTag>)tags;
+			}
+			Context.PhotoAlbums.Add(item);
+		}
+
 		public void AddTagsToAlbum(int albumId, IEnumerable<AlbumTag> tags)
 		{
 			var album = Context.PhotoAlbums.Find(albumId);
@@ -32,6 +47,21 @@ namespace EFDataProvider.Realization
 			}
 		}
 
+
+		public IEnumerable<PhotoAlbum> GetAlbumsByTag(AlbumTag tag)
+		{
+			if (tag == null)
+			{
+				return null;
+			}
+
+			var tagFounded = Context.AlbumTags
+								    .Where(t => t.TagName == tag.TagName)
+								    .FirstOrDefault();
+
+			return tagFounded != null ? (IEnumerable<PhotoAlbum>)tagFounded.Albums : null;
+		}
+
 		public int NumberOfAlbums(string userId)
 		{
 			return Context.PhotoAlbums.Count(a => a.UserId == userId);
@@ -47,6 +77,11 @@ namespace EFDataProvider.Realization
 
 		public override void Update(PhotoAlbum item)
 		{
+			if (item == null)
+			{
+				throw new ArgumentNullException("Item can't be null");
+			}
+
 			var album = Context.PhotoAlbums.Find(item.Id);
 
 			if (album != null)

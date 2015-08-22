@@ -9,29 +9,30 @@ namespace ServiceLayer
 {
 	interface IDataService : IDisposable
 	{
-		Task<bool> NewUser(User item);
-		Task<bool> NewAlbum(PhotoAlbum item, IEnumerable<AlbumTag> tags);
-		Task<bool> NewPhoto(Photo item);
-		Task<bool> NewAlbumComment(AlbumComment item);
-		Task<bool> NewPhotoComment(PhotoComment item);
+		void NewUser(User item);
+		void NewAlbum(PhotoAlbum item, IEnumerable<AlbumTag> tags);
+		void NewPhoto(Photo item);
+		void NewAlbumComment(AlbumComment item);
+		void NewPhotoComment(PhotoComment item);
 
-		Task<bool> UpdateAlbum(PhotoAlbum item);
-		Task<bool> UpdatePhoto(Photo item);
-		Task<bool> UpdateAlbumComment(AlbumComment item);
-		Task<bool> UpdatePhotoComment(PhotoComment item);
+		void UpdateAlbum(PhotoAlbum item);
+		void UpdatePhoto(Photo item);
+		void UpdateAlbumComment(AlbumComment item);
+		void UpdatePhotoComment(PhotoComment item);
 
-		Task<bool> DeleteAlbum(PhotoAlbum item);
-		Task<bool> DeletePhoto(Photo item);
-		Task<bool> DeleteAlbumComment(AlbumComment item);
-		Task<bool> DeletePhotoComment(PhotoComment item);
+		void DeleteAlbum(int albumId);
+		void DeletePhoto(int photoId);
+		void DeleteAlbumComment(int albumCommentId);
+		void DeletePhotoComment(int photoCommentId);
 
-		Task<IEnumerable<PhotoAlbum>> GetAlbums(string userId);
-		Task<IEnumerable<PhotoAlbum>> GetAlbums(AlbumTag tag);
-		Task<IEnumerable<Photo>> GetPhotos(string userId, int albumId);
-		Task<IEnumerable<Photo>> GetPhotos(string userId, int pageNumber, int pageSize);
-		Task<IEnumerable<AlbumComment>> GetAlbumComments(string userId, int albumId);
-		Task<IEnumerable<PhotoComment>> GetPhotoComments(string userId, int photoId);
+		Photo GetPhoto(int albumId);
+		IEnumerable<PhotoAlbum> GetAlbums(string userId);
+		IEnumerable<PhotoAlbum> GetAlbums(AlbumTag tag);
+		IEnumerable<Photo> GetPhotos(string userId, int albumId);
+		IEnumerable<Photo> GetPhotos(string userId, int pageNumber, int pageSize);
+		IEnumerable<AlbumComment> GetAlbumComments(string userId, int albumId);
+		IEnumerable<PhotoComment> GetPhotoComments(string userId, int photoId);
 
-		Task<UserStatistic> GetUserStatistic(string userId);
+		UserStatistic GetUserStatistic(string userId);
 	}
 }

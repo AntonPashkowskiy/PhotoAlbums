@@ -15,6 +15,11 @@ namespace EFDataProvider.Realization
 
 		public override void Update(AlbumComment item)
 		{
+			if (item == null)
+			{
+				throw new ArgumentNullException("Item can't be null");
+			}
+
 			var albumComment = Context.CommentsOfAlbums.Find(item.Id);
 
 			if (albumComment != null)

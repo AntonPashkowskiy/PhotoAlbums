@@ -20,6 +20,11 @@ namespace EFDataProvider.Realization
 
 		public void Add(User item)
 		{
+			if (item == null)
+			{
+				throw new ArgumentNullException("Item can't be null");
+			}
+
 			try
 			{
 				_context.Users.Add(item);

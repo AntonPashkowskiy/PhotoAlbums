@@ -52,6 +52,11 @@ namespace EFDataProvider.Realization
 
 		public void Add(TEntity item)
 		{
+			if (item == null)
+			{
+				throw new ArgumentNullException("Item can't be null.");
+			}
+
 			try
 			{
 				Context.Set<TEntity>().Add(item);

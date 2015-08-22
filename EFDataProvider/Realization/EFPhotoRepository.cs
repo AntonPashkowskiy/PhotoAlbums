@@ -15,6 +15,11 @@ namespace EFDataProvider.Realization
 
 		public IEnumerable<Photo> GetPhotos(string userId, int pageNumber, int pageSize)
 		{
+			if (String.IsNullOrEmpty(userId) || pageNumber < 0 || pageSize < 0)
+			{
+				return null;
+			}
+
 			return Context.Photo
 						  .Where(p => p.AuthorId == userId)
 						  .OrderByDescending(p => p.CreationDate)
@@ -37,6 +42,11 @@ namespace EFDataProvider.Realization
 
 		public override void Update(Photo item)
 		{
+			if (item == null)
+			{
+				throw new ArgumentNullException("Item can't be null.");				
+			}
+
 			var photo = Context.Photo.Find(item.Id);
 
 			if (photo != null)
