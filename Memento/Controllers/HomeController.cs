@@ -57,6 +57,13 @@ namespace Memento.Controllers
 		{
 			return View();
 		}
+
+		// GET /Home/Album/Id
+		public ActionResult Album(int? id)
+		{
+			AlbumViewModel model = new AlbumViewModel() { AlbumName = "My favorite album." };
+			return View(model);
+		}
 		
 		#region Helpers
 		#endregion

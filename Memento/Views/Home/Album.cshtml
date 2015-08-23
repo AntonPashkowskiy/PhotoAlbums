@@ -1,0 +1,71 @@
+﻿@using Memento.Models
+@model Memento.Models.AlbumViewModel
+
+
+@{
+    ViewBag.Title = "Album";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentUser = (CurrentUser)Session["CurrentUser"];
+}
+
+<div class="row">
+    <div class="col-md-2">
+        <img src="@Url.Content(currentUser.PhotoUrl)" class="user-avatar img-responsive img-circle" alt="no image" />
+        @if (Model.CurrentUserId == Model.AuthorId)
+        {
+            <div class="text-center">
+                @Html.ActionLink("Add new photo", "CreateAlbum", "Manage", null, new { @class = "add-button btn btn-primary btn-xs" })
+            </div>
+        }
+    </div>
+    <div class="albums-area col-md-10">
+        <h1 class="page-header">
+            @Model.AlbumName
+        </h1>
+        
+        <ul class="list-inline">
+            <li class="photo col-md-3 thumbnail">
+                <div class="text-right">
+                    <button class="delete-button"></button>
+                </div>
+                <a class="publication thumbnail" href="#">
+                    <img src="~/Content/Images/footer-haski.jpg" class="img-responsive" alt="no image">
+                </a>
+            </li>
+        </ul>
+
+        <div class="col-md-10 text-right">
+            @Html.Partial("_AlbumRatingPartial")
+        </div>
+
+        <hr class="col-md-10"/>
+
+        <div class="col-md-10">
+            <ul class="list-unstyled">
+                <li class="col-md-12">
+                    <h4>
+                        <strong>Comment title</strong>
+                    </h4>
+                    <p>
+                        Some comment text. Bla bla bla bla bla.
+                    </p>
+                </li>
+            </ul>
+            <div class="comment-input-area clearfix">
+                <div class="col-md-9">
+                    <textarea class="form-control" rows="3" spellcheck="false"></textarea>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary">Add comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        @Html.ActionLink("Back to albums", "Albums", "Home")
+    </div>
+</div>
+
+
+

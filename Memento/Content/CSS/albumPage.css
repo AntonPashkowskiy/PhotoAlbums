@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-.album {
+.album, .photo {
     margin: 5px;
 }
 
@@ -14,3 +14,57 @@
     content: '+ ';
 }
 
+.delete-button {
+    width: 20px;
+    height: 20px;
+
+    margin: 5px;
+    border-radius: 10px;
+
+    background-color: #757474;
+}
+
+.delete-button:hover {
+    background-color: #a41717;
+}
+
+.album-rating {
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: padding-box;
+
+    min-width: 60px;
+
+    padding: 5px;
+    margin: 5px;
+    border-radius: 20px;
+
+    font-size: 20px;
+    text-align: center;
+    
+    background-color: #757474;
+    color: #ffffff;
+}
+
+.rating-button {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+
+    margin: 5px;
+    border-radius: 20px;
+
+    background-color: #757474;
+}
+
+.cons-button:hover {
+    background-color: #a41717;
+}
+
+.pros-button:hover {
+    background-color: #15ae18;
+}
+
+.comment-input-area {
+    margin-top: 30px;
+}

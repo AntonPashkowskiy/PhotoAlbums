@@ -24,5 +24,8 @@ namespace Memento.Models
 
 		[Display(Name = "Overall photos rating")]
 		public int OverallPhotosRating { get; set; }
+
+		[Display(Name = "Job / Career")]
+		public string Job { get; set; }
 	}
 }

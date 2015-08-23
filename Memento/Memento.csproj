@@ -175,6 +175,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AlbumViewModel.cs" />
     <Compile Include="Models\CreateAlbumViewModel.cs" />
     <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -245,6 +246,8 @@
     <Content Include="Views\Home\PersonalRoom.cshtml" />
     <Content Include="Views\Home\Albums.cshtml" />
     <Content Include="Views\Manage\CreateAlbum.cshtml" />
+    <Content Include="Views\Home\Album.cshtml" />
+    <Content Include="Views\Shared\_AlbumRatingPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
