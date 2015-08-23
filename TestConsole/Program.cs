@@ -7,6 +7,9 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using EFDataProvider;
 using Entities;
+using Entities.Interfaces;
+using EFDataProvider.Realization;
+using ServiceLayer;
 
 namespace TestConsole
 {
@@ -14,13 +17,12 @@ namespace TestConsole
 	{
 		static void Main(string[] args)
 		{
-			string connectionString = ConfigurationManager.ConnectionStrings["PhotoAlbumsDBWork"].ConnectionString;
+			string connectionString = ConfigurationManager.ConnectionStrings["PhotoAlbumsDBHome"].ConnectionString;
+			IUnitOfWork unitOfWork = new EFUnitOfWork(connectionString);
 
-			using (var context = new PhotoAlbumsContext(connectionString))
+			using (var dataService = new DataService(unitOfWork))
 			{
-				User user = new User() { Id = "Simple added user." };
-				context.Users.Add(user);
-				context.SaveChanges();
+				dataService.DeleteAlbum(20);
 			}
 		}
 	}

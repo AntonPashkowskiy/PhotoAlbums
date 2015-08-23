@@ -22,7 +22,7 @@ namespace EFDataProvider.Realization
 
 			if (tags != null)
 			{
-				AddTagsToContext(tags);
+				tags = AddTagsToContext(tags);
 				item.Tags = (ICollection<AlbumTag>)tags;
 			}
 			Context.PhotoAlbums.Add(item);
@@ -36,12 +36,12 @@ namespace EFDataProvider.Realization
 			{
 				if (tags != null)
 				{
-					AddTagsToContext(tags);
-				}
+					var addedTags = AddTagsToContext(tags);
 
-				foreach (var tag in tags)
-				{
-					album.Tags.Add(tag);
+					foreach (var tag in addedTags)
+					{
+						album.Tags.Add(tag);
+					}
 				}
 				Context.Entry(album).State = EntityState.Modified;
 			}
@@ -69,10 +69,11 @@ namespace EFDataProvider.Realization
 
 		public int OverallRatingForAlbums(string userId)
 		{
-			return Context.PhotoAlbums
+			var result = Context.PhotoAlbums
 						  .Where(a => a.UserId == userId)
-						  .Select(a => a.Rating)
-						  .Aggregate(0, (s, i) => s + i);
+						  .Select(a => a.Rating);
+
+			return ((IEnumerable<int>)result).Aggregate(0, (s, i) => s + i);
 		}
 
 		public override void Update(PhotoAlbum item)
@@ -93,17 +94,27 @@ namespace EFDataProvider.Realization
 		}
 
 		#region Private
-		private void AddTagsToContext(IEnumerable<AlbumTag> tags)
+		private IEnumerable<AlbumTag> AddTagsToContext(IEnumerable<AlbumTag> tags)
 		{
 			var existingTags = Context.AlbumTags;
+			var result = new List<AlbumTag>();
 
 			foreach (var tag in tags)
 			{
-				if(existingTags.FirstOrDefault(t => t.TagName == tag.TagName) == null)
+				var tagFound = existingTags.FirstOrDefault(t => t.TagName == tag.TagName);
+
+				if(tagFound == null)
 				{
 					Context.AlbumTags.Add(tag);
+					result.Add(tag);
+				}
+				else 
+				{
+					result.Add(tagFound);
 				}
 			}
+
+			return result;
 		}
 		#endregion
 	}

@@ -34,10 +34,11 @@ namespace EFDataProvider.Realization
 
 		public int OverallRatingForPhotos(string userId)
 		{
-			return Context.Photo
+			var result = Context.Photo
 						  .Where(p => p.AuthorId == userId)
-						  .Select(p => p.Rating)
-						  .Aggregate(0, (s, i) => s + i);
+						  .Select(p => p.Rating);
+
+			return ((IEnumerable<int>)result).Aggregate(0, (s, i) => s + i);
 		}
 
 		public override void Update(Photo item)
