@@ -50,15 +50,7 @@ namespace Memento.Controllers
             }
         }
 
-		// GET /Manage/CreateAlbum
-		[HttpGet]
-		public ActionResult CreateAlbum(string returnUrl)
-		{
-			ViewBag.ReturnUrl = returnUrl;
-			return View();
-		}
-
-		// POST /Manage/CreateAlbum
+		// POST: /Manage/CreateAlbum
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult CreateAlbum(CreateAlbumViewModel model)
@@ -71,7 +63,22 @@ namespace Memento.Controllers
 			return View(model);
 		}
 
-        //
+		// POST: /Manage/UploadAvatar
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult UploadAvatar()
+		{
+			return View();
+		}
+
+		// POST: /Manage/UploadPhoto
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult UploadPhoto()
+		{
+			return View();
+		}
+
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {

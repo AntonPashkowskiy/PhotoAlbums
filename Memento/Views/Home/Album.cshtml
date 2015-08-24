@@ -14,7 +14,14 @@
         @if (Model.CurrentUserId == Model.AuthorId)
         {
             <div class="text-center">
-                @Html.ActionLink("Add new photo", "CreateAlbum", "Manage", null, new { @class = "add-button btn btn-primary btn-xs" })
+                <button type="button"
+                        data-toggle="modal"
+                        data-target="#upload-modal"
+                        class="add-button btn btn-primary btn-xs">
+                    Add new photo
+                </button>
+
+                @Html.Partial("_UploadPhotoPartial")
             </div>
         }
     </div>
@@ -28,44 +35,32 @@
                 <div class="text-right">
                     <button class="delete-button"></button>
                 </div>
-                <a class="publication thumbnail" href="#">
+                <a class="publication thumbnail" data-toggle="modal" data-target="#view-photo-modal" href="#">
                     <img src="~/Content/Images/footer-haski.jpg" class="img-responsive" alt="no image">
                 </a>
             </li>
         </ul>
 
-        <div class="col-md-10 text-right">
-            @Html.Partial("_AlbumRatingPartial")
-        </div>
+        @Html.Partial("_ViewPhotoPartial")
 
-        <hr class="col-md-10"/>
+        <div class="col-md-10 text-right">
+            @Html.Partial("_RatingPartial")
+        </div>
 
         <div class="col-md-10">
-            <ul class="list-unstyled">
-                <li class="col-md-12">
-                    <h4>
-                        <strong>Comment title</strong>
-                    </h4>
-                    <p>
-                        Some comment text. Bla bla bla bla bla.
-                    </p>
-                </li>
-            </ul>
-            <div class="comment-input-area clearfix">
-                <div class="col-md-9">
-                    <textarea class="form-control" rows="3" spellcheck="false"></textarea>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-primary">Add comment</button>
-                </div>
-            </div>
+            @Html.Partial("_CommentsAreaPartial")
         </div>
-    </div>
 
-    <div>
-        @Html.ActionLink("Back to albums", "Albums", "Home")
     </div>
 </div>
+
+<div class="row col-md-12">
+    @Html.ActionLink("Back to albums", "Albums", "Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/fileinput")
+}
 
 
 

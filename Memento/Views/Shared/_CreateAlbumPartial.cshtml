@@ -1,0 +1,53 @@
+﻿@model Memento.Models.CreateAlbumViewModel
+
+<div id="create-album-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    @using (Ajax.BeginForm("CreateAlbum", "Manage",
+    new AjaxOptions
+    {
+        HttpMethod = "POST",
+        OnSuccess = "OnSuccess"
+    }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">×</a>
+                    <h3>Creating of album</h3>
+                </div>
+
+                <div class="modal-body text-left">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AlbumName, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div>
+                            @Html.EditorFor(model => model.AlbumName, new { htmlAttributes = new { @class = "album-creating-input form-control" } })
+                            @Html.ValidationMessageFor(model => model.AlbumName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div>
+                            @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "album-creating-input form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AlbumDescription, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div>
+                            @Html.TextAreaFor(model => model.AlbumDescription, new { @class = "album-creating-input form-control", spellcheck = "false" })
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="#" class="btn" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

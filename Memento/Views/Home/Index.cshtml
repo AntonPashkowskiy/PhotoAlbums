@@ -17,30 +17,17 @@
             <ul class="publications-list list-inline row">
                 <li>
                     <a class="publication thumbnail" href="#">
-                        <img src="~/Content/Images/footer-haski.jpg" class="img-responsive" alt="no image">
-                    </a>
-                </li>
-                <li>
-                    <a class="publication thumbnail" href="#">
-                        <img src="~/Content/Images/footer-haski.jpg" class="img-responsive" alt="no image">
-                    </a>
-                </li>
-                <li>
-                    <a class="publication thumbnail" href="#">
-                        <img src="~/Content/Images/footer-haski.jpg" class="img-responsive" alt="no image">
-                    </a>
-                </li>
-                <li>
-                    <a class="publication thumbnail" href="#">
-                        <img src="~/Content/Images/footer-haski.jpg" class="img-responsive" alt="no image">
-                    </a>
-                </li>
-                <li>
-                    <a class="publication thumbnail" href="#">
-                        <img src="~/Content/Images/footer-haski.jpg" class="img-responsive" alt="no image">
+                        <img src="~/Content/Images/footer-haski.jpg" 
+                             data-toggle="modal" 
+                             data-target="#view-photo-modal" 
+                             class="img-responsive" 
+                             alt="no image">
                     </a>
                 </li>
             </ul>
+
+            @Html.Partial("_ViewPhotoPartial")
+
             <div class="view-more-area row">
                 <button class="btn btn-primary">View more</button>
             </div>

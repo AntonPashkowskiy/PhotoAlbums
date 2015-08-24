@@ -23,13 +23,17 @@ namespace Memento
 					  "~/Scripts/bootstrap.js",
 					  "~/Scripts/respond.js"));
 
+			bundles.Add(new ScriptBundle("~/bundles/fileinput").Include(
+					  "~/Scripts/fileinput.min.js"));
+
 			bundles.Add(new ScriptBundle("~/bundles/angular").Include(
 						"~/Scripts/angular.min.js",
 						"~/Scripts/angular-route.min.js",
 						"~/Scripts/angular-loader.min.js"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(
-					  "~/Content/CSS/*.css"));
+					  "~/Content/CSS/*.css",
+					  "~/Content/bootstrap-fileinput/css/fileinput.min.css"));
 		}
 	}
 }

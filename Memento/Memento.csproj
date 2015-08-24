@@ -185,11 +185,20 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\CSS\albumPage.css" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
+    <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
+    <Content Include="Content\bootstrap-fileinput\img\loading.gif" />
+    <Content Include="Content\CSS\album-page.css" />
     <Content Include="Content\CSS\bootstrap.css" />
     <Content Include="Content\CSS\bootstrap.min.css" />
-    <Content Include="Content\CSS\mainPage.css" />
+    <Content Include="Content\CSS\buttons.css" />
+    <Content Include="Content\CSS\comments.css" />
+    <Content Include="Content\CSS\main-page.css" />
     <Content Include="Content\CSS\navbar.css" />
+    <Content Include="Content\CSS\search.css" />
+    <Content Include="Content\CSS\user.css" />
+    <Content Include="Content\CSS\view-photo.css" />
     <Content Include="Content\Images\about-girl.jpg" />
     <Content Include="Content\Images\default-avatar.png" />
     <Content Include="Content\Images\fon-acrobats.jpg" />
@@ -197,17 +206,24 @@
     <Content Include="Content\Images\footer-child.jpg" />
     <Content Include="Content\Images\footer-haski.jpg" />
     <Content Include="Content\Images\footer-nature.jpg" />
-    <Content Include="Content\CSS\personalRoom.css" />
+    <Content Include="Content\Images\Witcher.jpg" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\CSS\Site.css" />
+    <Content Include="Content\CSS\site.css" />
     <Content Include="Scripts\angular-loader.min.js" />
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\fileinput.min.js" />
+    <Content Include="Scripts\fileinput_locale_LANG.js" />
+    <Content Include="Scripts\fileinput_locale_ru.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -245,17 +261,20 @@
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
     <Content Include="Views\Home\PersonalRoom.cshtml" />
     <Content Include="Views\Home\Albums.cshtml" />
-    <Content Include="Views\Manage\CreateAlbum.cshtml" />
     <Content Include="Views\Home\Album.cshtml" />
-    <Content Include="Views\Shared\_AlbumRatingPartial.cshtml" />
+    <Content Include="Views\Shared\_RatingPartial.cshtml" />
+    <Content Include="Views\Shared\_CommentsAreaPartial.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Shared\_UploadAvatarPartial.cshtml" />
+    <Content Include="Views\Shared\_UploadPhotoPartial.cshtml" />
+    <Content Include="Views\Shared\_CreateAlbumPartial.cshtml" />
+    <Content Include="Views\Shared\_ViewPhotoPartial.cshtml" />
+    <Content Include="Views\Shared\_InputFilePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

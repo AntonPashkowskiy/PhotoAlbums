@@ -37,7 +37,7 @@ namespace Memento.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-			: base("PhotoAlbumsDBHome", throwIfV1Schema: false)
+			: base("PhotoAlbumsDBWork", throwIfV1Schema: false)
         {
         }
 

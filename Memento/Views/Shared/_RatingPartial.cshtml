@@ -2,11 +2,11 @@
 
 @if (Model.CurrentUserId == Model.AuthorId)
 {
-    <span class="album-rating">@Model.AlbumRating</span>
+    <span class="rating">@Model.AlbumRating</span>
 }
 else
 {
     <button class="rating-button cons-button"></button>
-    <span class="album-rating">@Model.AlbumRating</span>
+    <span class="rating">@Model.AlbumRating</span>
     <button class="rating-button pros-button"></button>
 }

@@ -7,20 +7,27 @@
     var currentUser = (CurrentUser)Session["CurrentUser"];
 }
 
+<div class="row">
+    <div class="col-md-3">
+        <img src="@Url.Content(currentUser.PhotoUrl)" class="img-responsive img-thumbnail user-avatar" alt="no image">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <button type="button"
+                data-toggle="modal"
+                data-target="#upload-modal"
+                class="btn btn-primary">
+            Upload new avatar
+        </button>
+    </div>
+</div>
+
+@Html.Partial("_UploadAvatarPartial")
+
 @using (Html.BeginForm("PersonalRoom", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-        
-    <div class="row">
-        <div class="col-md-3">
-            <img src="@Url.Content(currentUser.PhotoUrl)" class="img-responsive img-thumbnail user-avatar" alt="no image">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <button type="button" class="btn btn-primary">Upload new avatar</button>
-        </div>
-    </div>
 
     <div class="form-horizontal row">
         <hr/>
@@ -92,3 +99,8 @@
 <div>
     @Html.ActionLink("Back to home", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/fileinput")
+}

@@ -1,0 +1,33 @@
+﻿<div id="view-photo-modal" class="modal fade text-center" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="view-photo-area modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>Photo</h3>
+            </div>
+            
+            <div class="modal-body text-center">
+                <ul class="pager">
+                    <li class="previous">
+                        <a href="#" class="btn btn-default">&larr; Previous</a>
+                    </li>
+                    <li class="next">
+                        <a href="#" class="btn btn-default">Next &rarr;</a>
+                    </li>
+                </ul>
+
+                <img src="@Url.Content("~/Content/Images/Witcher.jpg")" class="thumbnail" alt="no-image"/>
+
+                <div class="text-right">
+                    <button class="rating-button cons-button"></button>
+                    <span class="rating">42</span>
+                    <button class="rating-button pros-button"></button>
+                </div>
+                
+                <div class="text-left col-md-12">
+                    @Html.Partial("_CommentsAreaPartial")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

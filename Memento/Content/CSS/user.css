@@ -1,0 +1,13 @@
+﻿.avatar-area {
+    padding-top: 10px;
+
+    background-color: #c6c9ca;
+}
+
+.user-info {
+    display: inline-block;
+}
+
+.user-avatar {
+    margin: 10px 0;
+}

@@ -10,7 +10,14 @@
     <div class="col-md-2">
         <img src="@Url.Content(currentUser.PhotoUrl)" class="user-avatar img-responsive img-circle" alt="no image" />
         <div class="text-center">
-            @Html.ActionLink("Add new album", "CreateAlbum", "Manage", null, new { @class = "add-button btn btn-primary btn-xs" })
+            <button type="button"
+                    data-toggle="modal"
+                    data-target="#create-album-modal"
+                    class="add-button btn btn-primary btn-xs">
+                Add new album
+            </button>
+
+            @Html.Partial("_CreateAlbumPartial")
         </div>
     </div>
     <div class="albums-area col-md-10">
@@ -39,4 +46,11 @@
         </ul>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
 

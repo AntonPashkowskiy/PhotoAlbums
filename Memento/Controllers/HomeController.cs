@@ -26,7 +26,7 @@ namespace Memento.Controllers
 			return View();
 		}
 		
-		// GET /Home/PersonalRoom
+		// GET: /Home/PersonalRoom
 		[HttpGet]
 		public ActionResult PersonalRoom()
 		{
@@ -44,7 +44,7 @@ namespace Memento.Controllers
 			return View(model);
 		}
 
-		// POST /Home/PersonalRoom
+		// POST: /Home/PersonalRoom
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult PersonalRoom(PersonalRoomViewModel model)
@@ -52,17 +52,23 @@ namespace Memento.Controllers
 			return View(model);
 		}
 
-		// GET /Home/Albums
+		// GET: /Home/Albums
 		public ActionResult Albums()
 		{
 			return View();
 		}
 
-		// GET /Home/Album/Id
+		// GET: /Home/Album/Id
 		public ActionResult Album(int? id)
 		{
 			AlbumViewModel model = new AlbumViewModel() { AlbumName = "My favorite album." };
 			return View(model);
+		}
+
+		// GET: /Home/Search
+		public ActionResult Search()
+		{
+			return View();
 		}
 		
 		#region Helpers

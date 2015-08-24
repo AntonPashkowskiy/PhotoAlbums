@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    
+    <div class="col-md-9">
+        <h1 class="page-header">Search results</h1>
+        <ul class="list-inline">
+            <li class="album col-md-3 thumbnail">
+                <ul class="tags-area list-inline">
+                    <li>
+                        <span class="label label-primary">Nature</span>
+                    </li>
+                    <li>
+                        <span class="label label-primary">Lake</span>
+                    </li>
+                    <li>
+                        <span class="label label-primary">Mountings</span>
+                    </li>
+                </ul>
+                <img src="~/Content/Images/footer-nature.jpg" class="img-responsive" alt="no-image" />
+                <div class="caption">
+                    <h4>Album Name</h4>
+                    <p>The great album description. Some text of description.</p>
+                    <button class="btn btn-primary">View more</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-3">
+        <div class="search-line input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">Search!</button>
+            </span>
+        </div>
+        <div class="search-selector btn-group clearfix">
+            <button class="search-selector btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                Search type
+                <span class="caret"></span>
+            </button>
+            <ul class="search-selector dropdown-menu">
+                <li>
+                    <a href="#">Search by name</a>
+                </li>
+                <li>
+                    <a href="#">Search by tag</a>
+                </li>
+                <li>
+                    <a href="#">Search by job</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
