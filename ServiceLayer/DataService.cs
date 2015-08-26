@@ -29,10 +29,15 @@ namespace ServiceLayer
 			_unitOfWork.Save();
 		}
 
-		public void NewAlbum(PhotoAlbum item, IEnumerable<AlbumTag> tags)
+		public int CreateAlbum(PhotoAlbum item, IEnumerable<AlbumTag> tags)
 		{
 			_unitOfWork.Albums.AddAlbum(item, tags);
 			_unitOfWork.Save();
+
+			var album = _unitOfWork.Albums
+				.Find(a => a.CreationDate == item.CreationDate && a.UserId == item.UserId)
+				.FirstOrDefault();
+			return album.Id;
 		}
 
 		public void NewPhoto(Photo item)

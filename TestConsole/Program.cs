@@ -19,11 +19,6 @@ namespace TestConsole
 		{
 			string connectionString = ConfigurationManager.ConnectionStrings["PhotoAlbumsDBHome"].ConnectionString;
 			IUnitOfWork unitOfWork = new EFUnitOfWork(connectionString);
-
-			using (var dataService = new DataService(unitOfWork))
-			{
-				dataService.DeleteAlbum(20);
-			}
 		}
 	}
 }

@@ -3,12 +3,11 @@
 @{
     ViewBag.Title = "Albums";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var currentUser = (CurrentUser)Session["CurrentUser"];
 }
 
 <div class="row">
     <div class="col-md-2">
-        <img src="@Url.Content(currentUser.PhotoUrl)" class="user-avatar img-responsive img-circle" alt="no image" />
+        <img src="@Url.Content(ViewBag.CurrentUser.PhotoUrl)" class="user-avatar img-responsive img-circle" alt="no image" />
         <div class="text-center">
             <button type="button"
                     data-toggle="modal"

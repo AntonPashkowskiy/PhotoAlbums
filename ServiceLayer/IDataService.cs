@@ -7,10 +7,10 @@ using Entities;
 
 namespace ServiceLayer
 {
-	interface IDataService : IDisposable
+	public interface IDataService : IDisposable
 	{
+		int CreateAlbum(PhotoAlbum item, IEnumerable<AlbumTag> tags);
 		void NewUser(User item);
-		void NewAlbum(PhotoAlbum item, IEnumerable<AlbumTag> tags);
 		void NewPhoto(Photo item);
 		void NewAlbumComment(AlbumComment item);
 		void NewPhotoComment(PhotoComment item);

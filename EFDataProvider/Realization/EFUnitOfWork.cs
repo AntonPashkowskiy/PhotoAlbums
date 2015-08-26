@@ -94,7 +94,14 @@ namespace EFDataProvider.Realization
 
 		public void Save()
 		{
-			_context.SaveChanges();
+			try
+			{
+				_context.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				throw new Exception("Save changes failed.", e);
+			}
 		}
 
 		public void Dispose()

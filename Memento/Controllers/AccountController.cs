@@ -9,47 +9,23 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Memento.Models;
+using ServiceLayer;
+using Entities;
+using Memento.Environment.DataManagement;
 
 namespace Memento.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+		public AccountController(IDataService dataService) : base(dataService) {}
 
-        public AccountController()
+        public AccountController(
+			ApplicationUserManager userManager, 
+			ApplicationSignInManager signInManager, 
+			IDataService dataService
+		) : base(userManager, signInManager, dataService)
         {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
         }
 
         // GET: /Account/Login
@@ -103,7 +79,10 @@ namespace Memento.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
+				string userId = Guid.NewGuid().ToString();
+                
+				var user = new ApplicationUser {
+					Id = userId,
  					FirstName = model.FirstName,
 					LastName = model.LastName,
 					Login = model.Login,
@@ -118,6 +97,8 @@ namespace Memento.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+					DataService.NewUser(new User(){ Id = userId });
+					HttpContext.CreateUserDataDirectory(user.UserName);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     return RedirectToAction("Index", "Home");
@@ -136,26 +117,6 @@ namespace Memento.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
-
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                    _signInManager = null;
-                }
-            }
-
-            base.Dispose(disposing);
         }
 
         #region Helpers

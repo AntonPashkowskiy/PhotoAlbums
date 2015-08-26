@@ -1,9 +1,14 @@
 ﻿<div id="upload-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    @using (Ajax.BeginForm("UploadPhoto", "Manage",
+    @using (Ajax.BeginForm("UploadPhoto", "Albums",
+    null,
     new AjaxOptions
     {
-        HttpMethod = "POST",
-        OnSuccess = "OnSuccess"
+        HttpMethod = "POST"
+    }, 
+    new 
+    { 
+        id = "UploadForm",
+        enctype = "multipart/form-data" 
     }))
     {
         @Html.AntiForgeryToken()
@@ -15,6 +20,7 @@
                     <h3>Photo uploading</h3>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" name="albumId" value="345"/>
                     @Html.Partial("_InputFilePartial")
                 </div>
             </div>

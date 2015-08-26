@@ -1,18 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Entities;
 using Memento.Models;
+using ServiceLayer;
 
 namespace Memento.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController : BaseController
 	{
+		public HomeController(IDataService dataService) : base(dataService) {}
+
 		public ActionResult Index()
 		{
-			Session["CurrentUser"] = new CurrentUser();
+			ViewBag.CurrentUser = CurrentUser;
 
+			if (Request.IsAuthenticated)
+			{
+				return View("HomePage");
+			}
+			return View("StartPage");
+		}
+		
+		// GET: /Home/PersonalRoom
+		[HttpGet]
+		public ActionResult PersonalRoom()
+		{
+			ViewBag.CurrentUser = CurrentUser;
+			UserStatistic statistic = DataService.GetUserStatistic(CurrentUser.Id);
+			
+			var model = new PersonalRoomViewModel()
+			{
+				FirstName = CurrentUser.FirstName,
+				LastName = CurrentUser.LastName,
+				Login = CurrentUser.Login,
+				NumberOfAlbums = statistic.NumberOfAlbums,
+				NumberOfPhotos = statistic.NumberOfPhotos,
+				OverallAlbumsRating = statistic.OverallRatingOfAlbums,
+				OverallPhotosRating = statistic.OverallRatingOfPhotos,
+				Job = CurrentUser.Job
+			};
+			return View(model);
+		}
+
+		// POST: /Home/PersonalRoom
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> PersonalRoom(PersonalRoomViewModel model)
+		{
+			ViewBag.CurrentUser = CurrentUser;
+
+			if (model.Job != null)
+			{
+				CurrentUser.Job = model.Job;
+				await UserManager.UpdateAsync(CurrentUser);
+			}
+			else
+			{
+				model.Job = string.Empty;
+			}
+			return View(model);
+		}
+
+		// GET: /Home/Albums
+		public ActionResult Albums()
+		{
+			ViewBag.CurrentUser = CurrentUser;
+			return View();
+		}
+
+		// GET: /Home/Search
+		public ActionResult Search()
+		{
 			return View();
 		}
 
@@ -22,51 +84,6 @@ namespace Memento.Controllers
 		}
 
 		public ActionResult Contact()
-		{
-			return View();
-		}
-		
-		// GET: /Home/PersonalRoom
-		[HttpGet]
-		public ActionResult PersonalRoom()
-		{
-			// get statistic from database
-			var model = new PersonalRoomViewModel()
-			{
-				FirstName = "Anton",
-				LastName = "Pashkouski",
-				Login = "Wolendrang",
-				NumberOfAlbums = 4,
-				NumberOfPhotos = 5,
-				OverallAlbumsRating = 4,
-				OverallPhotosRating = 5
-			};
-			return View(model);
-		}
-
-		// POST: /Home/PersonalRoom
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult PersonalRoom(PersonalRoomViewModel model)
-		{
-			return View(model);
-		}
-
-		// GET: /Home/Albums
-		public ActionResult Albums()
-		{
-			return View();
-		}
-
-		// GET: /Home/Album/Id
-		public ActionResult Album(int? id)
-		{
-			AlbumViewModel model = new AlbumViewModel() { AlbumName = "My favorite album." };
-			return View(model);
-		}
-
-		// GET: /Home/Search
-		public ActionResult Search()
 		{
 			return View();
 		}

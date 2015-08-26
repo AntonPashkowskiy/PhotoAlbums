@@ -1,7 +1,7 @@
 ﻿@model Memento.Models.CreateAlbumViewModel
 
 <div id="create-album-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    @using (Ajax.BeginForm("CreateAlbum", "Manage",
+    @using (Ajax.BeginForm("CreateAlbum", "Albums",
     new AjaxOptions
     {
         HttpMethod = "POST",
@@ -38,6 +38,13 @@
                         @Html.LabelFor(model => model.AlbumDescription, htmlAttributes: new { @class = "control-label col-md-3" })
                         <div>
                             @Html.TextAreaFor(model => model.AlbumDescription, new { @class = "album-creating-input form-control", spellcheck = "false" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsPrivate, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div>
+                            @Html.CheckBoxFor(model => model.IsPrivate, new { @class = "album-creating-input form-control" })
                         </div>
                     </div>
                 </div>

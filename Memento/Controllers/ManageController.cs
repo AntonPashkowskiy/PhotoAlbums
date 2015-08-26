@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -7,76 +8,37 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Memento.Models;
+using ServiceLayer;
+using System.IO;
+using Memento.Environment.DataManagement;
 
 namespace Memento.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        public ManageController(IDataService dataService) : base(dataService) {}
 
-        public ManageController()
+        public ManageController(
+			ApplicationUserManager userManager, 
+			ApplicationSignInManager signInManager, 
+			IDataService dataService
+		) : base(userManager, signInManager, dataService)
         {
         }
-
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
-		// POST: /Manage/CreateAlbum
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult CreateAlbum(CreateAlbumViewModel model)
-		{
-			if (ModelState.IsValid)
-			{
-
-			}
-
-			return View(model);
-		}
 
 		// POST: /Manage/UploadAvatar
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult UploadAvatar()
+		public async Task<ActionResult> UploadAvatar(HttpPostedFileBase file)
 		{
-			return View();
-		}
+			if (file == null)
+			{
+				return Json("Upload failed.");
+			}
+			string localPath = await SaveFileInUserDirectory(file);
 
-		// POST: /Manage/UploadPhoto
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult UploadPhoto()
-		{
-			return View();
+			return Json(localPath);
 		}
 
         // GET: /Manage/Index
@@ -101,57 +63,6 @@ namespace Memento.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
-        }
-
-        // POST: /Manage/RemoveLogin
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
-        {
-            ManageMessageId? message;
-            var result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
-            if (result.Succeeded)
-            {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                }
-                message = ManageMessageId.RemoveLoginSuccess;
-            }
-            else
-            {
-                message = ManageMessageId.Error;
-            }
-            return RedirectToAction("ManageLogins", new { Message = message });
-        }
-
-        // POST: /Manage/EnableTwoFactorAuthentication
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EnableTwoFactorAuthentication()
-        {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null)
-            {
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-            }
-            return RedirectToAction("Index", "Manage");
-        }
-
-        // POST: /Manage/DisableTwoFactorAuthentication
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DisableTwoFactorAuthentication()
-        {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null)
-            {
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-            }
-            return RedirectToAction("Index", "Manage");
         }
 
         // GET: /Manage/ChangePassword
@@ -212,62 +123,8 @@ namespace Memento.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        // GET: /Manage/ManageLogins
-        public async Task<ActionResult> ManageLogins(ManageMessageId? message)
-        {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : "";
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user == null)
-            {
-                return View("Error");
-            }
-            var userLogins = await UserManager.GetLoginsAsync(User.Identity.GetUserId());
-            var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
-            ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
-            return View(new ManageLoginsViewModel
-            {
-                CurrentLogins = userLogins,
-                OtherLogins = otherLogins
-            });
-        }
-
-        // POST: /Manage/LinkLogin
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LinkLogin(string provider)
-        {
-            // Request a redirect to the external login provider to link a login for the current user
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
-        }
-
-        // GET: /Manage/LinkLoginCallback
-        public async Task<ActionResult> LinkLoginCallback()
-        {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
-            if (loginInfo == null)
-            {
-                return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
-            }
-            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
-            return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && _userManager != null)
-            {
-                _userManager.Dispose();
-                _userManager = null;
-            }
-
-            base.Dispose(disposing);
-        }
-
-#region Helpers
+	
+		#region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -307,6 +164,32 @@ namespace Memento.Controllers
             return false;
         }
 
+		private async Task<string> SaveFileInUserDirectory(HttpPostedFileBase file)
+		{
+			Size smallSize = PhotoManager.GetThumbailSize(PhotoSize.Small);
+			Size standartSize = PhotoManager.GetThumbailSize(PhotoSize.AvatarStandart);
+			
+			string extention = Path.GetExtension(file.FileName);
+			ServerPath smallPhotoPath = HttpContext.GetFilePath(DirectoryType.AvatarDirectory, CurrentUser.UserName, extention);
+			ServerPath standartPhotoPath = HttpContext.GetFilePath(DirectoryType.AvatarDirectory, CurrentUser.UserName, extention);
+
+			using (var stream = new MemoryStream())
+			{
+				file.InputStream.CopyTo(stream);
+				Image originalImage = Image.FromStream(stream);
+				Image smallImage = originalImage.GetThumbnailImage(smallSize.Width, smallSize.Height, null, IntPtr.Zero);
+				Image standartImage = originalImage.GetThumbnailImage(standartSize.Width, standartSize.Height, null, IntPtr.Zero);
+
+				smallImage.Save(smallPhotoPath.AbsolutePath);
+				standartImage.Save(standartPhotoPath.AbsolutePath);
+			}
+			CurrentUser.SmallPhotoUrl = smallPhotoPath.LocalPath;
+			CurrentUser.PhotoUrl = standartPhotoPath.LocalPath;
+			await UserManager.UpdateAsync(CurrentUser);
+
+			return standartPhotoPath.LocalPath;
+		}
+
         public enum ManageMessageId
         {
             AddPhoneSuccess,
@@ -317,7 +200,6 @@ namespace Memento.Controllers
             RemovePhoneSuccess,
             Error
         }
-
-#endregion
+		#endregion
     }
 }

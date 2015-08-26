@@ -57,15 +57,7 @@ namespace EFDataProvider.Realization
 				throw new ArgumentNullException("Item can't be null.");
 			}
 
-			try
-			{
-				Context.Set<TEntity>().Add(item);
-			}
-			catch (Exception e)
-			{
-				string message = string.Format("{0} entity adding is failed.", item.GetType().ToString());
-				throw new Exception(message, e);
-			}
+			Context.Set<TEntity>().Add(item);
 		}
 
 		public virtual void Update(TEntity item)

@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3 avatar-area">
+        <img src="@Url.Content(ViewBag.CurrentUser.PhotoUrl)" class="img-responsive img-thumbnail" alt="no image">
+        <h4>
+            @(ViewBag.CurrentUser.FirstName + " " + ViewBag.CurrentUser.LastName)<br/>
+            <small>@ViewBag.CurrentUser.Login</small>
+        </h4>
+    </div>
+    <div class="col-md-9">
+        <ul class="publications-list list-inline row">
+            <li>
+                <a class="publication thumbnail" href="#">
+                    <img src="~/Content/Images/footer-haski.jpg"
+                         data-toggle="modal"
+                         data-target="#view-photo-modal"
+                         class="img-responsive"
+                         alt="no image">
+                </a>
+            </li>
+        </ul>
+
+        @Html.Partial("_ViewPhotoPartial")
+
+        <div class="view-more-area row">
+            <button class="btn btn-primary">View more</button>
+        </div>
+    </div>
+</div>
+

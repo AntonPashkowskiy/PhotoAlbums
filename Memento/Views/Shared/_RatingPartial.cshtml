@@ -1,6 +1,6 @@
 ﻿@model Memento.Models.AlbumViewModel
 
-@if (Model.CurrentUserId == Model.AuthorId)
+@if (Model.IsAlbumOfUser)
 {
     <span class="rating">@Model.AlbumRating</span>
 }
