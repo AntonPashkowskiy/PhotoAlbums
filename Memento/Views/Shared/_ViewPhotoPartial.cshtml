@@ -19,9 +19,9 @@
                 <img src="@Url.Content("~/Content/Images/Witcher.jpg")" class="thumbnail" alt="no-image"/>
 
                 <div class="text-right">
-                    <button class="rating-button cons-button"></button>
-                    <span class="rating">42</span>
-                    <button class="rating-button pros-button"></button>
+                    @{
+                        Html.RenderPartial("_RatingPartial", null, ViewData);
+                    }
                 </div>
                 
                 <div class="text-left col-md-12">

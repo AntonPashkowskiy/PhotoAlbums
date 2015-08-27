@@ -1,12 +1,15 @@
-﻿@model Memento.Models.AlbumViewModel
+﻿@{
+    bool isResourseOfCurrentUser = (bool)ViewData["isResourseOfCurrentUser"];
+    int resourseRating = (int)ViewData["resourseRating"]; 
+}
 
-@if (Model.IsAlbumOfUser)
+@if (isResourseOfCurrentUser)
 {
-    <span class="rating">@Model.AlbumRating</span>
+    <span class="rating">@resourseRating</span>
 }
 else
 {
     <button class="rating-button cons-button"></button>
-    <span class="rating">@Model.AlbumRating</span>
+    <span class="rating">@resourseRating</span>
     <button class="rating-button pros-button"></button>
 }

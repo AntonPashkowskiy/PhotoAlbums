@@ -1,13 +1,14 @@
 ﻿@using Memento.Models
 @model Memento.Models.AlbumViewModel
 
-
 @{
     ViewBag.Title = "Album";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["isResourseOfCurrentUser"] = Model.IsAlbumOfUser;
 }
 
 <div class="row">
+    <input type="hidden" id="current-album-id" value="@Model.AlbumId" />
     <div class="col-md-2">
         <img src="@Url.Content(ViewBag.CurrentUser.PhotoUrl)" class="user-avatar img-responsive img-circle" alt="no image" />
         @if (Model.IsAlbumOfUser)
@@ -19,8 +20,9 @@
                         class="add-button btn btn-primary btn-xs">
                     Add new photo
                 </button>
-
-                @Html.Partial("_UploadPhotoPartial")
+                @{
+                    Html.RenderPartial("_UploadPhotoPartial", Model);
+                }
             </div>
         }
     </div>
@@ -39,11 +41,16 @@
                 </a>
             </li>
         </ul>
+        @{
+            ViewData["resourseRating"] = 0;
+            Html.RenderPartial("_ViewPhotoPartial", null, ViewData);
+        }
 
-        @Html.Partial("_ViewPhotoPartial")
-
-        <div class="col-md-10 text-right">
-            @Html.Partial("_RatingPartial");
+        <div class="col-md-10 text-right"> 
+            @{
+                ViewData["resourseRating"] = Model.AlbumRating;
+                Html.RenderPartial("_RatingPartial", null, ViewData);
+            }
         </div>
 
         <div class="col-md-10">

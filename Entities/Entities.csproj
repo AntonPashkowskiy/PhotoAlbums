@@ -48,6 +48,7 @@
     <Compile Include="EFEntities\EFPhotoAlbum.cs" />
     <Compile Include="EFEntities\EFPhotoComment.cs" />
     <Compile Include="EFEntities\EFUser.cs" />
+    <Compile Include="Entities\CommentType.cs" />
     <Compile Include="Entities\Photo.cs" />
     <Compile Include="Entities\PhotoAlbum.cs" />
     <Compile Include="Entities\PhotoComment.cs" />

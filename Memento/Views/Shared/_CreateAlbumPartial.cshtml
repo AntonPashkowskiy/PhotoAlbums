@@ -4,8 +4,7 @@
     @using (Ajax.BeginForm("CreateAlbum", "Albums",
     new AjaxOptions
     {
-        HttpMethod = "POST",
-        OnSuccess = "OnSuccess"
+        HttpMethod = "POST"
     }))
     {
         @Html.AntiForgeryToken()
@@ -31,6 +30,9 @@
                         @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
                         <div>
                             @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "album-creating-input form-control" } })
+                            <h4>
+                                <small>For example: #family, #nature, #dog.</small>
+                            </h4>
                         </div>
                     </div>
 

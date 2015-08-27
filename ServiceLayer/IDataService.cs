@@ -9,16 +9,20 @@ namespace ServiceLayer
 {
 	public interface IDataService : IDisposable
 	{
-		int CreateAlbum(PhotoAlbum item, IEnumerable<AlbumTag> tags);
 		void NewUser(User item);
-		void NewPhoto(Photo item);
-		void NewAlbumComment(AlbumComment item);
-		void NewPhotoComment(PhotoComment item);
+		int CreateAlbum(PhotoAlbum item, IEnumerable<AlbumTag> tags);
+		int CreatePhoto(Photo item);
+		int CreateAlbumComment(AlbumComment item);
+		int CreatePhotoComment(PhotoComment item);
 
 		void UpdateAlbum(PhotoAlbum item);
 		void UpdatePhoto(Photo item);
 		void UpdateAlbumComment(AlbumComment item);
 		void UpdatePhotoComment(PhotoComment item);
+
+		bool CheckPossibilityOfDeletingComment(string userId, int commentId, CommentType type);
+		bool CheckPossibilityOfDeletingPhoto(string userId, int photoId);
+		bool CheckPossibilityOfDeletingAlbum(string userId, int albumId);
 
 		void DeleteAlbum(int albumId);
 		void DeletePhoto(int photoId);
@@ -30,8 +34,8 @@ namespace ServiceLayer
 		IEnumerable<PhotoAlbum> GetAlbums(AlbumTag tag);
 		IEnumerable<Photo> GetPhotos(string userId, int albumId);
 		IEnumerable<Photo> GetPhotos(string userId, int pageNumber, int pageSize);
-		IEnumerable<AlbumComment> GetAlbumComments(string userId, int albumId);
-		IEnumerable<PhotoComment> GetPhotoComments(string userId, int photoId);
+		IEnumerable<AlbumComment> GetAlbumComments(int albumId);
+		IEnumerable<PhotoComment> GetPhotoComments(int photoId);
 
 		UserStatistic GetUserStatistic(string userId);
 	}

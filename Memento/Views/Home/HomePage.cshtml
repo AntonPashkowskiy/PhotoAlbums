@@ -24,7 +24,11 @@
             </li>
         </ul>
 
-        @Html.Partial("_ViewPhotoPartial")
+        @{
+            ViewData["isResourseOfCurrentUser"] = true;
+            ViewData["resourseRating"] = 0;
+            Html.RenderPartial("_ViewPhotoPartial", null, ViewData);
+        }
 
         <div class="view-more-area row">
             <button class="btn btn-primary">View more</button>

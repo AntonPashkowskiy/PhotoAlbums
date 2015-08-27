@@ -192,11 +192,18 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
+    <Compile Include="Controllers\API\AlbumsApiController.cs" />
+    <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\PhotoApiController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="DTO\Mapper.cs" />
+    <Compile Include="DTO\AlbumCommentDTO.cs" />
+    <Compile Include="DTO\CommentDTO.cs" />
+    <Compile Include="DTO\Mappers\DTOMapper.cs" />
+    <Compile Include="DTO\Mappers\EntitiesMapper.cs" />
     <Compile Include="DTO\PhotoAlbumDTO.cs" />
+    <Compile Include="DTO\PhotoCommentDTO.cs" />
     <Compile Include="DTO\PhotoDTO.cs" />
     <Compile Include="Environment\CustomControllerFactory.cs" />
     <Compile Include="Environment\DataManagement\ServerPath.cs" />
@@ -283,7 +290,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
@@ -296,7 +302,6 @@
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
     <Content Include="Views\Home\PersonalRoom.cshtml" />
     <Content Include="Views\Home\Albums.cshtml" />
-    <Content Include="Views\Home\Album.cshtml" />
     <Content Include="Views\Shared\_RatingPartial.cshtml" />
     <Content Include="Views\Shared\_CommentsAreaPartial.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
@@ -305,10 +310,14 @@
     <Content Include="Views\Shared\_CreateAlbumPartial.cshtml" />
     <Content Include="Views\Shared\_ViewPhotoPartial.cshtml" />
     <Content Include="Views\Shared\_InputFilePartial.cshtml" />
+    <Content Include="Views\Albums\Album.cshtml" />
+    <Content Include="Views\Home\HomePage.cshtml" />
+    <Content Include="Views\Home\StartPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UserData\" />
+    <Folder Include="Views\BaseApi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -10,6 +10,7 @@ using Entities;
 using Entities.Interfaces;
 using EFDataProvider.Realization;
 using ServiceLayer;
+using System.Text.RegularExpressions;
 
 namespace TestConsole
 {
@@ -17,8 +18,15 @@ namespace TestConsole
 	{
 		static void Main(string[] args)
 		{
-			string connectionString = ConfigurationManager.ConnectionStrings["PhotoAlbumsDBHome"].ConnectionString;
-			IUnitOfWork unitOfWork = new EFUnitOfWork(connectionString);
+			string pattern = @"#(\w)+";
+			string target = "#nature. #family. #poison";
+			Regex tagRegexp = new Regex(pattern);
+
+			foreach (var match in tagRegexp.Matches(target))
+			{
+				Console.WriteLine(match.ToString());
+			}
+			Console.ReadKey();
 		}
 	}
 }

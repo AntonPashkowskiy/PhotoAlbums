@@ -7,6 +7,7 @@ namespace Memento.DTO
 {
 	public class PhotoDTO
 	{
+		public int Id { get; set; }
 		public string SmallPhotoUrl { get; set; }
 		public string MediumPhotoUrl { get; set; }
 		public string FullPhotoUrl { get; set; }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-	public abstract class Comment
+	public enum CommentType
 	{
-		public int Id { get; set; }
-		public string CommentText { get; set; }
-		public DateTime CreationDate { get; set; }
+		PhotoComment,
+		AlbumComment
 	}
 }

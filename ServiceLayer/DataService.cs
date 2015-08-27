@@ -36,26 +36,41 @@ namespace ServiceLayer
 
 			var album = _unitOfWork.Albums
 				.Find(a => a.CreationDate == item.CreationDate && a.UserId == item.UserId)
-				.FirstOrDefault();
+				.First();
 			return album.Id;
 		}
 
-		public void NewPhoto(Photo item)
+		public int CreatePhoto(Photo item)
 		{
 			_unitOfWork.Photo.Add(item);
 			_unitOfWork.Save();
+
+			var photo = _unitOfWork.Photo
+				.Find(p => p.CreationDate == item.CreationDate && p.AuthorId == item.AuthorId)
+				.First();
+			return photo.Id;
 		}
 
-		public void NewAlbumComment(AlbumComment item)
+		public int CreateAlbumComment(AlbumComment item)
 		{
 			_unitOfWork.AlbumComments.Add(item);
 			_unitOfWork.Save();
+
+			var albumComment = _unitOfWork.AlbumComments
+				.Find(c => c.CreationDate == item.CreationDate && c.AuthorId == item.AuthorId)
+				.First();
+			return albumComment.Id;
 		}
 
-		public void NewPhotoComment(PhotoComment item)
+		public int CreatePhotoComment(PhotoComment item)
 		{
 			_unitOfWork.PhotoComments.Add(item);
 			_unitOfWork.Save();
+
+			var photoComment = _unitOfWork.PhotoComments
+				.Find(c => c.CreationDate == item.CreationDate && c.AuthorId == item.AuthorId)
+				.First();
+			return photoComment.Id;
 		}
 
 		public void UpdateAlbum(PhotoAlbum item)
@@ -80,6 +95,33 @@ namespace ServiceLayer
 		{
 			_unitOfWork.PhotoComments.Update(item);
 			_unitOfWork.Save();
+		}
+
+		public bool CheckPossibilityOfDeletingComment(string userId, int commentId, CommentType type)
+		{
+			switch (type)
+			{
+				case CommentType.AlbumComment:
+					var albumComment = _unitOfWork.AlbumComments.Get(commentId);
+					return albumComment != null ? albumComment.TargetAlbum.UserId == userId : false;
+
+				case CommentType.PhotoComment:
+				default:
+					var photoComment = _unitOfWork.PhotoComments.Get(commentId);
+					return photoComment != null ? photoComment.TargetPhoto.AuthorId == userId : false;
+			}
+		}
+
+		public bool CheckPossibilityOfDeletingPhoto(string userId, int photoId)
+		{
+			var photo = _unitOfWork.Photo.Get(photoId);
+			return photo != null ? photo.AuthorId == userId : false;
+		}
+
+		public bool CheckPossibilityOfDeletingAlbum(string userId, int albumId)
+		{
+			var album = _unitOfWork.Albums.Get(albumId);
+			return album != null ? album.UserId == userId : false;
 		}
 
 		public void DeleteAlbum(int albumId)
@@ -131,25 +173,25 @@ namespace ServiceLayer
 			return _unitOfWork.Photo.GetPhotos(userId, pageNumber, pageSize);
 		}
 
-		public IEnumerable<AlbumComment> GetAlbumComments(string userId, int albumId)
+		public IEnumerable<AlbumComment> GetAlbumComments(int albumId)
 		{
-			return _unitOfWork.AlbumComments.Find(c => c.AuthorId == userId && c.AlbumId == albumId);
+			return _unitOfWork.AlbumComments.Find(c => c.AlbumId == albumId);
 		}
 
-		public IEnumerable<PhotoComment> GetPhotoComments(string userId, int photoId)
+		public IEnumerable<PhotoComment> GetPhotoComments(int photoId)
 		{
-			return _unitOfWork.PhotoComments.Find(c => c.AuthorId == userId && c.PhotoId == photoId);
+			return _unitOfWork.PhotoComments.Find(c => c.PhotoId == photoId);
 		}
 
 		public UserStatistic GetUserStatistic(string userId)
 		{
-			UserStatistic statistic = new UserStatistic();
-			statistic.NumberOfAlbums = _unitOfWork.Albums.NumberOfAlbums(userId);
-			statistic.NumberOfPhotos = _unitOfWork.Photo.NumberOfPhotos(userId);
-			statistic.OverallRatingOfAlbums = _unitOfWork.Albums.OverallRatingForAlbums(userId);
-			statistic.OverallRatingOfPhotos = _unitOfWork.Photo.OverallRatingForPhotos(userId);
-
-			return statistic;
+			return new UserStatistic()
+			{
+				NumberOfAlbums = _unitOfWork.Albums.NumberOfAlbums(userId),
+				NumberOfPhotos = _unitOfWork.Photo.NumberOfPhotos(userId),
+				OverallRatingOfAlbums = _unitOfWork.Albums.OverallRatingForAlbums(userId),
+				OverallRatingOfPhotos = _unitOfWork.Photo.OverallRatingForPhotos(userId)
+			};
 		}
 
 		public void Dispose()
