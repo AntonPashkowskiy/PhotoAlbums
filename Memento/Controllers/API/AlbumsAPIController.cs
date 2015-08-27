@@ -32,69 +32,29 @@ namespace Memento.Controllers.API
 							  .Select(a => a.ToPhotoAlbumDTO());
 		}
 
-		[Route("api/albums/{albumId}/comments")]
-		[HttpGet]
-		public IEnumerable<AlbumCommentDTO> GetCommentsOfAlbum(int albumId)
-		{
-			return DataService.GetAlbumComments(albumId).Select(c => c.ToAlbumCommentDTO());
-		}
-
 		[Route("api/albums/update")]
 		[HttpPut]
 		public bool UpdateAlbum(PhotoAlbumDTO album)
 		{
-			try
+			bool isOwnerOfAlbum = DataService.CheckPossibilityOfChangingAlbum(CurrentUserId, album.Id);
+
+			if (isOwnerOfAlbum)
 			{
 				DataService.UpdateAlbum(album.ToPhotoAlbum());
 				return true;
 			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-
-		[Route("api/albums/comments/update")]
-		[HttpPut]
-		public bool UpdateComment(AlbumCommentDTO albumComment)
-		{
-			try
-			{
-				DataService.UpdateAlbumComment(albumComment.ToAlbumComment());
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
+			return false;
 		}
 
 		[Route("api/albums/{albumId}/delete")]
 		[HttpDelete]
 		public bool DeleteAlbum(int albumId)
 		{
-			bool isOwnerOfAlbum = DataService.CheckPossibilityOfDeletingAlbum(CurrentUserId, albumId);
+			bool isOwnerOfAlbum = DataService.CheckPossibilityOfChangingAlbum(CurrentUserId, albumId);
 
 			if (isOwnerOfAlbum)
 			{
 				DataService.DeleteAlbum(albumId);
-				return true;
-			}
-			return false;
-		}
-
-		[Route("api/albums/comments/{commentId}/delete")]
-		[HttpDelete]
-		public bool DeleteComment(int commentId)
-		{
-			bool isOwnerOfResourse = DataService.CheckPossibilityOfDeletingComment(
-				CurrentUserId,
-				commentId,
-				CommentType.AlbumComment);
-
-			if (isOwnerOfResourse)
-			{
-				DataService.DeleteAlbumComment(commentId);
 				return true;
 			}
 			return false;

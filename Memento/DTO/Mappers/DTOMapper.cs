@@ -31,23 +31,23 @@ namespace Memento.DTO
 			};
 		}
 
-		public static AlbumComment ToAlbumComment(this AlbumCommentDTO albumCommentDto)
+		public static AlbumComment ToAlbumComment(this CommentDTO albumCommentDto)
 		{
 			return new AlbumComment()
 			{
 				Id = albumCommentDto.Id,
 				CommentText = albumCommentDto.CommentText,
-				AlbumId = albumCommentDto.TargetAlbumId
+				AlbumId = albumCommentDto.ResourseId
 			};
 		}
 
-		public static PhotoComment ToPhotoComment(this PhotoCommentDTO photoCommentDto)
+		public static PhotoComment ToPhotoComment(this CommentDTO photoCommentDto)
 		{
 			return new PhotoComment()
 			{
 				Id = photoCommentDto.Id,
 				CommentText = photoCommentDto.CommentText,
-				PhotoId = photoCommentDto.TargetPhotoId
+				PhotoId = photoCommentDto.ResourseId
 			};
 		}
 	}

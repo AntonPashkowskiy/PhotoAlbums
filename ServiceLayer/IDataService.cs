@@ -20,9 +20,9 @@ namespace ServiceLayer
 		void UpdateAlbumComment(AlbumComment item);
 		void UpdatePhotoComment(PhotoComment item);
 
-		bool CheckPossibilityOfDeletingComment(string userId, int commentId, CommentType type);
-		bool CheckPossibilityOfDeletingPhoto(string userId, int photoId);
-		bool CheckPossibilityOfDeletingAlbum(string userId, int albumId);
+		bool CheckPossibilityOfChangingComment(string userId, int commentId, CommentType type);
+		bool CheckPossibilityOfChangingPhoto(string userId, int photoId);
+		bool CheckPossibilityOfChangingAlbum(string userId, int albumId);
 
 		void DeleteAlbum(int albumId);
 		void DeletePhoto(int photoId);

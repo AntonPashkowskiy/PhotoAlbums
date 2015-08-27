@@ -81,42 +81,6 @@ namespace Memento.Controllers
 
 			return Json(information);
 		}
-		
-		// Restructuring need. Violated the principle of DRY.
-		// Ajax POST: /Albums/AddCommentToAlbum
-		[HttpPost]
-		public ActionResult AddCommentToAlbum(AlbumCommentDTO albumComment)
-		{
-			if (albumComment.CommentText == null)
-			{
-				return new EmptyResult();
-			}
-			var comment = albumComment.ToAlbumComment();
-			comment.AuthorId = CurrentUser.Id;
-			var result = SaveAlbumCommentInDB(comment);
-			result.AuthorFullName = CurrentUser.FirstName + " " + CurrentUser.LastName;
-			result.AuthorEmail = CurrentUser.Email;
-
-			return Json(result);
-		}
-
-		// Restructuring need. Violated the principle of DRY.
-		// Ajax POST: /Albums/AddCommentToPhoto
-		[HttpPost]
-		public ActionResult AddCommentToPhoto(PhotoCommentDTO photoComment)
-		{
-			if (photoComment.CommentText == null)
-			{
-				return new EmptyResult();
-			}
-			var comment = photoComment.ToPhotoComment();
-			comment.AuthorId = CurrentUser.Id;
-			var result = SavePhotoCommentInDB(comment);
-			result.AuthorFullName = CurrentUser.FirstName + " " + CurrentUser.LastName;
-			result.AuthorEmail = CurrentUser.Email;
-
-			return Json(result);
-		}
 
 		#region Helpers
 		private Photo SavePhotoInUserDirectory(HttpPostedFileBase file)
@@ -153,8 +117,7 @@ namespace Memento.Controllers
 		{
 			try
 			{
-				int photoId = DataService.CreatePhoto(information);
-				information.Id = photoId;
+				information.Id = DataService.CreatePhoto(information);
 				return information.ToPhotoDTO();
 			}
 			catch (Exception e)
@@ -198,32 +161,6 @@ namespace Memento.Controllers
 			catch (Exception e)
 			{
 				throw new Exception("Save album failed", e);
-			}
-		}
-
-		private AlbumCommentDTO SaveAlbumCommentInDB(AlbumComment comment)
-		{
-			try
-			{
-				comment.Id = DataService.CreateAlbumComment(comment);
-				return comment.ToAlbumCommentDTO();
-			}
-			catch (Exception e)
-			{
-				throw new Exception("Save comment failed.", e);
-			}
-		}
-
-		private PhotoCommentDTO SavePhotoCommentInDB(PhotoComment comment)
-		{
-			try
-			{
-				comment.Id = DataService.CreatePhotoComment(comment);
-				return comment.ToPhotoCommentDTO();
-			}
-			catch (Exception e)
-			{
-				throw new Exception("Save comment failed.", e);
 			}
 		}
 		#endregion

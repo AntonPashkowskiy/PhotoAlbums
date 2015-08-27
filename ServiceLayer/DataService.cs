@@ -97,7 +97,7 @@ namespace ServiceLayer
 			_unitOfWork.Save();
 		}
 
-		public bool CheckPossibilityOfDeletingComment(string userId, int commentId, CommentType type)
+		public bool CheckPossibilityOfChangingComment(string userId, int commentId, CommentType type)
 		{
 			switch (type)
 			{
@@ -112,13 +112,13 @@ namespace ServiceLayer
 			}
 		}
 
-		public bool CheckPossibilityOfDeletingPhoto(string userId, int photoId)
+		public bool CheckPossibilityOfChangingPhoto(string userId, int photoId)
 		{
 			var photo = _unitOfWork.Photo.Get(photoId);
 			return photo != null ? photo.AuthorId == userId : false;
 		}
 
-		public bool CheckPossibilityOfDeletingAlbum(string userId, int albumId)
+		public bool CheckPossibilityOfChangingAlbum(string userId, int albumId)
 		{
 			var album = _unitOfWork.Albums.Get(albumId);
 			return album != null ? album.UserId == userId : false;
