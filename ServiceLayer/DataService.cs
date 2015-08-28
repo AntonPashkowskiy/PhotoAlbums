@@ -175,12 +175,12 @@ namespace ServiceLayer
 
 		public IEnumerable<AlbumComment> GetAlbumComments(int albumId)
 		{
-			return _unitOfWork.AlbumComments.Find(c => c.AlbumId == albumId);
+			return _unitOfWork.AlbumComments.GetComments(albumId);
 		}
 
 		public IEnumerable<PhotoComment> GetPhotoComments(int photoId)
 		{
-			return _unitOfWork.PhotoComments.Find(c => c.PhotoId == photoId);
+			return _unitOfWork.PhotoComments.GetComments(photoId);
 		}
 
 		public UserStatistic GetUserStatistic(string userId)

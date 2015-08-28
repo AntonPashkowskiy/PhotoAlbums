@@ -97,7 +97,13 @@ namespace Memento.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-					DataService.NewUser(new User(){ Id = userId });
+					DataService.NewUser(new User() 
+					{ 
+						Id = userId,
+						FirstName = model.FirstName,
+						LastName = model.LastName,
+						Email = model.Email
+					});
 					HttpContext.CreateUserDataDirectory(user.UserName);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
@@ -131,7 +137,7 @@ namespace Memento.Controllers
             }
         }
 
-        private void AddErrors(IdentityResult result)
+		private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
             {
@@ -175,7 +181,7 @@ namespace Memento.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
-        }
-        #endregion
-    }
+		}
+		#endregion
+	}
 }

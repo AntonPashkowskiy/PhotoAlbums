@@ -14,6 +14,7 @@ namespace Memento.Controllers
 	{
 		public HomeController(IDataService dataService) : base(dataService) {}
 
+		// GET: /Home/Index
 		public ActionResult Index()
 		{
 			ViewBag.CurrentUser = CurrentUser;

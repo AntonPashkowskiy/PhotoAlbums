@@ -38,6 +38,8 @@ namespace Memento.DTO
 			{
 				Id = comment.Id,
 				CommentText = comment.CommentText,
+				AuthorFullName = string.Join(" ", comment.Author.FirstName, comment.Author.LastName),
+				AuthorEmail = comment.Author.Email,
 				ResourseId = comment.PhotoId,
 				ResourseType = CommentTypeMapper.GetResourseType(CommentType.PhotoComment)
 			};
@@ -49,6 +51,8 @@ namespace Memento.DTO
 			{
 				Id = comment.Id,
 				CommentText = comment.CommentText,
+				AuthorFullName = string.Join(" ", comment.Author.FirstName, comment.Author.LastName),
+				AuthorEmail = comment.Author.Email,
 				ResourseId = comment.AlbumId,
 				ResourseType = CommentTypeMapper.GetResourseType(CommentType.AlbumComment)
 			};

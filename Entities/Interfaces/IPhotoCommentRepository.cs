@@ -9,5 +9,6 @@ namespace Entities.Interfaces
 {
 	public interface IPhotoCommentRepository : IRepository<PhotoComment> 
 	{
+		IEnumerable<PhotoComment> GetComments(int photoId);
 	}
 }

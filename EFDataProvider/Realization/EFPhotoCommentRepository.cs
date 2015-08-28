@@ -13,6 +13,13 @@ namespace EFDataProvider.Realization
 	{
 		public EFPhotoCommentRepository(PhotoAlbumsContext context) : base(context) { }
 
+		public IEnumerable<PhotoComment> GetComments(int photoId)
+		{
+			return Context.CommentsOfPhotos
+						  .Where(c => c.PhotoId == photoId)
+						  .Include(c => c.Author);
+		}
+
 		public override void Update(PhotoComment item)
 		{
 			if (item == null)

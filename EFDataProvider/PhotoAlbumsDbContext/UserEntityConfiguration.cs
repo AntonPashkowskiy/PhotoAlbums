@@ -17,6 +17,15 @@ namespace EFDataProvider
 			this.ToTable("UserInfo");
 			this.HasKey<string>(u => u.Id);
 
+			this.Property(u => u.FirstName)
+				.IsRequired();
+
+			this.Property(u => u.LastName)
+				.IsRequired();
+
+			this.Property(u => u.Email)
+				.IsRequired();
+
 			// Foreign keys configuration
 			this.HasMany(u => u.PhotoAlbums)
 				.WithRequired(a => a.AlbumUser)

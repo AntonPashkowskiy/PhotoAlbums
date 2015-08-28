@@ -18,7 +18,7 @@ namespace Memento.Models
 		[Display(Name = "Album description")]
 		public string AlbumDescription { get; set; }
 
-		[Display(Name = "Is private")]
+		[Display(Name = "Is private album")]
 		public bool IsPrivate { get; set; }
 	}
 }
