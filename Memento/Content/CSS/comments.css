@@ -1,11 +1,20 @@
-﻿.comment-input-area {
+﻿.comments {
+    padding: 0;
+}
+
+.comment-input-area {
     margin-top: 30px;
 }
 
 .comment-textarea {
-    max-width: 100%;
+    max-width: initial;
+    resize: none;
 }
 
 .comment-text {
     padding-left: 15px;
+}
+
+.comment-adding-block {
+    margin: 15px 0;
 }

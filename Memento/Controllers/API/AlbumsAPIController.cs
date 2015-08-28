@@ -21,7 +21,9 @@ namespace Memento.Controllers.API
 		[HttpGet]
 		public IEnumerable<PhotoAlbumDTO> GetAlbums()
 		{
-			return DataService.GetAlbums(CurrentUserId).Select(a => a.ToPhotoAlbumDTO());
+			return DataService.GetAlbums(CurrentUserId)
+							  .Where(a => !a.IsPrivate)
+							  .Select(a => a.ToPhotoAlbumDTO());
 		}
 
 		[Route("api/albums/tag/{tag}")]
@@ -29,6 +31,16 @@ namespace Memento.Controllers.API
 		public IEnumerable<PhotoAlbumDTO> GetAlbumsByTag(string tag)
 		{
 			return DataService.GetAlbums(new AlbumTag() { TagName = tag })
+							  .Where(a => !a.IsPrivate)
+							  .Select(a => a.ToPhotoAlbumDTO());
+		}
+
+		[Route("api/albums/name/{fullName}")]
+		[HttpGet]
+		public IEnumerable<PhotoAlbumDTO> GetAlbumsByName(string fullName)
+		{
+			return DataService.GetAlbumsByName(fullName)
+							  .Where(a => !a.IsPrivate)
 							  .Select(a => a.ToPhotoAlbumDTO());
 		}
 

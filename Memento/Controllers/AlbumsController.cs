@@ -65,15 +65,16 @@ namespace Memento.Controllers
 		// POST: /Albums/UploadPhoto
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult UploadPhoto(HttpPostedFileBase file, int albumId)
+		public ActionResult UploadPhoto(HttpPostedFileBase file, UploadingPhotoViewModel model)
 		{
 			if (file == null)
 			{
 				return Json("Upload failed.");
 			}
 			Photo photoInformation = SavePhotoInUserDirectory(file);
-			photoInformation.AlbumId = albumId;
+			photoInformation.AlbumId = model.AlbumId;
 			photoInformation.AuthorId = CurrentUser.Id;
+			photoInformation.Description = model.PhotoDescription;
 			photoInformation.CreationDate = DateTime.Now;
 		
 			PhotoDTO information = SavePhotoInformationInDB(photoInformation);

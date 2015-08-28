@@ -1,0 +1,18 @@
+﻿.view-photo-area {
+    display: inline-block;
+    width: auto;
+}
+
+.photo-description-label {
+    display: block;
+    text-align: left;
+}
+
+.photo-description-textarea {
+    width: 100%;
+    max-width: 100%;
+
+    resize: none;
+
+    margin: 10px 0;
+}

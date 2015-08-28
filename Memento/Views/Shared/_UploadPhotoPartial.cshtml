@@ -1,4 +1,4 @@
-﻿@model Memento.Models.AlbumViewModel
+﻿@model Memento.Models.UploadingPhotoViewModel
 
 <div id="upload-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     @using (Ajax.BeginForm("UploadPhoto", "Albums",
@@ -22,7 +22,9 @@
                     <h3>Photo uploading</h3>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="albumId" value="@Model.AlbumId"/>
+                    <input type="hidden" name="AlbumId" value="@Model.AlbumId"/>
+                    @Html.LabelFor(model => model.PhotoDescription, htmlAttributes: new { @class = "photo-description-label" })
+                    @Html.TextAreaFor(model => model.PhotoDescription, new { @class = "photo-description-textarea form-control", spellcheck = "false" })
                     @Html.Partial("_InputFilePartial")
                 </div>
             </div>

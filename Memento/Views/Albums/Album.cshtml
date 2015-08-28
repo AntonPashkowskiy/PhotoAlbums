@@ -5,6 +5,11 @@
     ViewBag.Title = "Album";
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["isResourseOfCurrentUser"] = Model.IsAlbumOfUser;
+
+    var uploadPhotoModel = new UploadingPhotoViewModel() {
+        AlbumId = Model.AlbumId,
+        PhotoDescription = string.Empty
+    };
 }
 
 <div class="row">
@@ -21,7 +26,7 @@
                     Add new photo
                 </button>
                 @{
-                    Html.RenderPartial("_UploadPhotoPartial", Model);
+                    Html.RenderPartial("_UploadPhotoPartial", uploadPhotoModel, ViewData);
                 }
             </div>
         }
@@ -46,14 +51,14 @@
             Html.RenderPartial("_ViewPhotoPartial", null, ViewData);
         }
 
+        <hr class="col-md-10"/>
         <div class="col-md-10 text-right"> 
             @{
                 ViewData["resourseRating"] = Model.AlbumRating;
                 Html.RenderPartial("_RatingPartial", null, ViewData);
             }
         </div>
-
-        <div class="col-md-10">
+        <div class="comments col-md-10">
             @Html.Partial("_CommentsAreaPartial")
         </div>
 

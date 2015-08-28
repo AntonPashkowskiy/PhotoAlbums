@@ -32,6 +32,7 @@ namespace ServiceLayer
 		Photo GetPhoto(int albumId);
 		IEnumerable<PhotoAlbum> GetAlbums(string userId);
 		IEnumerable<PhotoAlbum> GetAlbums(AlbumTag tag);
+		IEnumerable<PhotoAlbum> GetAlbumsByName(string fullUserName);
 		IEnumerable<Photo> GetPhotos(string userId, int albumId);
 		IEnumerable<Photo> GetPhotos(string userId, int pageNumber, int pageSize);
 		IEnumerable<AlbumComment> GetAlbumComments(int albumId);

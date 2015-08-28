@@ -163,6 +163,11 @@ namespace ServiceLayer
 			return _unitOfWork.Albums.GetAlbumsByTag(tag); 
 		}
 
+		public IEnumerable<PhotoAlbum> GetAlbumsByName(string fullUserName)
+		{
+			return _unitOfWork.Albums.GetAlbumsByName(fullUserName);
+		}
+
 		public IEnumerable<Photo> GetPhotos(string userId, int albumId)
 		{
 			return _unitOfWork.Photo.Find(p => p.AuthorId == userId && p.AlbumId == albumId);

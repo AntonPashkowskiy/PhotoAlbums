@@ -10,26 +10,21 @@
     margin-bottom: 5px;
 }
 
-.rating {
-    display: inline-block;
-    vertical-align: middle;
-    box-sizing: padding-box;
-
-    min-width: 60px;
-
-    padding: 5px;
-    margin: 5px;
-    border-radius: 20px;
-
-    font-size: 20px;
-    text-align: center;
-    
-    background-color: #757474;
-    color: #ffffff;
-}
-
 .album-creating-input {
     width: 100%;
+}
+
+.album-checkbox {
+    width: auto;
+    vertical-align: top;
+
+    margin-right: 10px;
+}
+
+.album-checkbox-label {
+    margin-left: 15px;
+
+    font-weight: normal;
 }
 
 .example {

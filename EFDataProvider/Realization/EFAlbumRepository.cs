@@ -62,6 +62,18 @@ namespace EFDataProvider.Realization
 			return tagFounded != null ? (IEnumerable<PhotoAlbum>)tagFounded.Albums : null;
 		}
 
+		public IEnumerable<PhotoAlbum> GetAlbumsByName(string fullUserName)
+		{
+			if (fullUserName == null)
+			{
+				return null;
+			}
+
+			return Context.PhotoAlbums.Where(a =>
+				string.Join(" ", a.AlbumUser.FirstName, a.AlbumUser.LastName) == fullUserName
+			);
+		}
+
 		public int NumberOfAlbums(string userId)
 		{
 			return Context.PhotoAlbums.Count(a => a.UserId == userId);
