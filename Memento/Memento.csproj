@@ -262,6 +262,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\CustomScripts\avatarUploading.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\fileinput_locale_LANG.js" />
     <Content Include="Scripts\fileinput_locale_ru.js" />
@@ -317,6 +318,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\AngularControllers\" />
+    <Folder Include="Scripts\AngularServices\" />
     <Folder Include="UserData\" />
     <Folder Include="Views\BaseApi\" />
     <Folder Include="Views\Comment\" />

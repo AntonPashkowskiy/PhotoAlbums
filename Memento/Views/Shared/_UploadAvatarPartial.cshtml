@@ -3,7 +3,9 @@
     null,
     new AjaxOptions
     {
-        HttpMethod = "POST"
+        HttpMethod = "POST",
+        OnSuccess = "AvatarUploading.onSuccess",
+        OnFailure = "AvatarUploading.onFailure"
     }, 
     new 
     { 

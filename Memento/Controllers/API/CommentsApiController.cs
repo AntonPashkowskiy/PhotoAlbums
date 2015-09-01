@@ -55,7 +55,7 @@ namespace Memento.Controllers.API
 
 		[Route("api/comments/update")]
 		[HttpPut]
-		public bool UpdateComment(CommentDTO comment)
+		public void UpdateComment(CommentDTO comment)
 		{
 			CommentType type = CommentTypeMapper.GetCommentType(comment.ResourseType);
 			bool isCommentOwner = DataService.CheckPossibilityOfChangingComment(CurrentUserId, comment.Id, type);
@@ -73,14 +73,12 @@ namespace Memento.Controllers.API
 						DataService.UpdatePhotoComment(comment.ToPhotoComment());
 						break;
 				}
-				return true;
 			}
-			return false;
 		}
 
 		[Route("api/albums/comments/{commentId}/delete")]
 		[HttpDelete]
-		public bool DeleteAlbumComment(int commentId)
+		public void DeleteAlbumComment(int commentId)
 		{
 			bool isOwnerOfResourse = DataService.CheckPossibilityOfChangingComment(
 				CurrentUserId,
@@ -90,14 +88,12 @@ namespace Memento.Controllers.API
 			if (isOwnerOfResourse)
 			{
 				DataService.DeleteAlbumComment(commentId);
-				return true;
 			}
-			return false;
 		}
 
 		[Route("api/photos/comments/{commentId}/delete")]
 		[HttpDelete]
-		public bool DeletePhotoComment(int commentId)
+		public void DeletePhotoComment(int commentId)
 		{
 			bool isOwnerOfResourse = DataService.CheckPossibilityOfChangingComment(
 				CurrentUserId,
@@ -107,9 +103,7 @@ namespace Memento.Controllers.API
 			if (isOwnerOfResourse)
 			{
 				DataService.DeletePhotoComment(commentId);
-				return true;
 			}
-			return false;
 		}
 	}
 }

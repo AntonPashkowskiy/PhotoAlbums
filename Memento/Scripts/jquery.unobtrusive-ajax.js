@@ -117,12 +117,17 @@
             }
         });
 
-        options.data.push({ name: "X-Requested-With", value: "XMLHttpRequest" });
-
         method = options.type.toUpperCase();
+
+        if (options.data instanceof FormData) {
+            options.processData = false;
+            options.contentType = false;
+            options.data.append("X-Requested-With", "XMLHttpRequest");
+        }
+
         if (!isMethodProxySafe(method)) {
             options.type = "POST";
-            options.data.push({ name: "X-HTTP-Method-Override", value: method });
+            options.data.append("X-HTTP-Method-Override", method);
         }
 
         $.ajax(options);
@@ -180,10 +185,18 @@
         if (!isCancel && !validate(this)) {
             return;
         }
+        var formData;
+        
+        if (this.enctype && this.enctype === "multipart/form-data") {
+            formData = new FormData(this);
+        } else {
+            formData = clickInfo.concat($(this).serializeArray());
+        }
+
         asyncRequest(this, {
             url: this.action,
             type: this.method || "GET",
-            data: clickInfo.concat($(this).serializeArray())
+            data: formData
         });
     });
 }(jQuery));

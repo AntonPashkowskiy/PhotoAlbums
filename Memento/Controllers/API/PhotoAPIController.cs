@@ -33,30 +33,26 @@ namespace Memento.Controllers.API
 
 		[Route("api/photos/update")]
 		[HttpPut]
-		public bool UpdatePhoto(PhotoDTO photo)
+		public void UpdatePhoto(PhotoDTO photo)
 		{
 			bool isOwnerOfPhoto = DataService.CheckPossibilityOfChangingPhoto(CurrentUserId, photo.Id);
 
 			if (isOwnerOfPhoto)
 			{
 				DataService.UpdatePhoto(photo.ToPhoto());
-				return true;
 			}
-			return false;
 		}
 
 		[Route("api/photos/{photoId}/delete")]
 		[HttpDelete]
-		public bool DeletePhoto(int photoId)
+		public void DeletePhoto(int photoId)
 		{
 			bool isOwnerOfPhoto = DataService.CheckPossibilityOfChangingPhoto(CurrentUserId, photoId);
 
 			if (isOwnerOfPhoto)
 			{
 				DataService.DeletePhoto(photoId);
-				return true;
 			}
-			return false;
 		}
     }
 }

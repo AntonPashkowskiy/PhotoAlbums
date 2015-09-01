@@ -8,7 +8,10 @@
 
 <div class="row">
     <div class="col-md-3">
-        <img src="@Url.Content(ViewBag.CurrentUser.PhotoUrl)" class="img-responsive img-thumbnail user-avatar" alt="no image">
+        <img id="user-avatar" 
+             src="@Url.Content(ViewBag.CurrentUser.PhotoUrl)" 
+             class="img-responsive img-thumbnail user-avatar" 
+             alt="no image">
     </div>
 </div>
 <div class="row">
@@ -101,4 +104,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/custom-scripts")
 }

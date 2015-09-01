@@ -34,7 +34,7 @@ namespace Memento.Controllers
 		{
 			if (file == null)
 			{
-				return Json("Upload failed.");
+				return null;
 			}
 			string localPath = await SaveFileInUserDirectory(file);
 			return Json(localPath);
