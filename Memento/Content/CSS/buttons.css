@@ -7,6 +7,7 @@
     height: 20px;
 
     margin: 5px;
+    -ms-border-radius: 10px;
     border-radius: 10px;
 
     background-color: #757474;
@@ -22,6 +23,7 @@
     height: 30px;
 
     margin: 5px;
+    -ms-border-radius: 20px;
     border-radius: 20px;
 
     background-color: #757474;

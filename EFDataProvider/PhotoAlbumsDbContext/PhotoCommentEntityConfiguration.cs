@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities;
+﻿using System.Data.Entity.ModelConfiguration;
+using Entities.Entities;
 
-namespace EFDataProvider
+namespace EFDataProvider.PhotoAlbumsDbContext
 {
 	class PhotoCommentEntityConfiguration : EntityTypeConfiguration<PhotoComment>
 	{
 		public PhotoCommentEntityConfiguration()
 		{
-			this.ToTable("PhotoComment");
+			ToTable("PhotoComment");
 
-			this.HasKey<int>(c => c.Id);
+			HasKey(c => c.Id);
 
-			this.Property(c => c.CommentText)
+			Property(c => c.CommentText)
 				.HasColumnType("ntext")
 				.IsRequired();
 
-			this.Property(c => c.CreationDate)
+			Property(c => c.CreationDate)
 				.HasColumnType("datetime")
 				.IsRequired();
 		}

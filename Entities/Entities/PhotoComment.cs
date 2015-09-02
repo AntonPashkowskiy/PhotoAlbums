@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entities
+﻿namespace Entities.Entities
 {
-	public partial class PhotoComment : Comment
+	public class PhotoComment : Comment
 	{
 		public int PhotoId { get; set; }
 		public string AuthorId { get; set; }
+		
+		// navigation properties for Entity Framework
+		public virtual Photo TargetPhoto { get; set; }
+		public virtual User Author { get; set; }
 	}
 }

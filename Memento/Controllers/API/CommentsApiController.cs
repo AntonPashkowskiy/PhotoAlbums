@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using Entities;
+using Entities.Entities;
 using Memento.DTO;
+using Memento.DTO.Mappers;
 using ServiceLayer;
 
 namespace Memento.Controllers.API
@@ -20,14 +18,14 @@ namespace Memento.Controllers.API
 		[HttpGet]
 		public IEnumerable<CommentDTO> GetCommentsOfAlbum(int albumId)
 		{
-			return DataService.GetAlbumComments(albumId).Select(c => c.ToCommentDTO());
+			return DataService.GetAlbumComments(albumId).Select(c => c.ToCommentDto());
 		}
 
 		[Route("api/photos/{photoId}/comments")]
 		[HttpGet]
 		public IEnumerable<CommentDTO> GetCommentsOfPhoto(int photoId)
 		{
-			return DataService.GetPhotoComments(photoId).Select(c => c.ToCommentDTO());
+			return DataService.GetPhotoComments(photoId).Select(c => c.ToCommentDto());
 		}
 
 		[Route("api/comments/add")]
@@ -42,14 +40,14 @@ namespace Memento.Controllers.API
 					AlbumComment informationAboutComment = comment.ToAlbumComment();
 					informationAboutComment.AuthorId = CurrentUserId;
 					informationAboutComment.Id = DataService.CreateAlbumComment(informationAboutComment);
-					return informationAboutComment.ToCommentDTO();
+					return informationAboutComment.ToCommentDto();
 
 				case CommentType.PhotoComment:
 				default:
 					PhotoComment information = comment.ToPhotoComment();
 					information.AuthorId = CurrentUserId;
 					information.Id = DataService.CreatePhotoComment(information);
-					return information.ToCommentDTO();
+					return information.ToCommentDto();
 			}
 		}
 

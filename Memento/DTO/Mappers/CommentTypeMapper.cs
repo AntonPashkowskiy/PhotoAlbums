@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Entities;
+﻿using Entities.Entities;
 
-namespace Memento.DTO
+namespace Memento.DTO.Mappers
 {
 	public static class CommentTypeMapper
 	{

@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities;
+using EFDataProvider.PhotoAlbumsDbContext;
+using Entities.Entities;
 using Entities.Interfaces;
 
 namespace EFDataProvider.Realization
 {
 	class EFAlbumCommentRepository : EFRepository<AlbumComment>, IAlbumCommentRepository
 	{
-		public EFAlbumCommentRepository(PhotoAlbumsContext context) : base(context) {}
+		public EFAlbumCommentRepository(PhotoAlbumsContext context) : base(context) { }
 
 		public IEnumerable<AlbumComment> GetComments(int albumId)
 		{

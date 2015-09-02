@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities;
+using EFDataProvider.PhotoAlbumsDbContext;
+using Entities.Entities;
 using Entities.Interfaces;
 
 namespace EFDataProvider.Realization
@@ -55,9 +54,7 @@ namespace EFDataProvider.Realization
 				return null;
 			}
 
-			var tagFounded = Context.AlbumTags
-								    .Where(t => t.TagName == tag.TagName)
-								    .FirstOrDefault();
+			var tagFounded = Context.AlbumTags.FirstOrDefault(t => t.TagName == tag.TagName);
 
 			return tagFounded != null ? (IEnumerable<PhotoAlbum>)tagFounded.Albums : null;
 		}

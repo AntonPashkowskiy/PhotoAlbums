@@ -1,15 +1,18 @@
 ﻿AvatarUploading = (function ($) {
 
-    var onSuccess = function (data) {
+    var analyseData = function(data) {
+        if (!data) {
+            return;
+        }
         $('#user-avatar').attr('src', data);
-    }
+    };
 
-    var onFailure = function (message) {
+    var onFailure = function() {
         alert("Failed avatar upload.");
-    }
+    };
 
     return {
-        onSuccess: onSuccess,
+        analyseData: analyseData,
         onError: onFailure
     };
 })(jQuery);

@@ -1,8 +1,9 @@
-﻿using Microsoft.Owin;
+﻿using Memento.App_Start;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Memento.Startup))]
-namespace Memento
+[assembly: OwinStartupAttribute(typeof(Startup))]
+namespace Memento.App_Start
 {
     public partial class Startup
     {

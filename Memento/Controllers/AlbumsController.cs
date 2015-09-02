@@ -7,7 +7,9 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Entities;
+using Entities.Entities;
 using Memento.DTO;
+using Memento.DTO.Mappers;
 using Memento.Environment.DataManagement;
 using Memento.Models;
 using ServiceLayer;
@@ -24,28 +26,26 @@ namespace Memento.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult CreateAlbum(CreateAlbumViewModel model)
 		{
-			if (ModelState.IsValid)
+			if (!ModelState.IsValid) return new EmptyResult();
+
+			var album = new PhotoAlbum()
 			{
-				PhotoAlbum album = new PhotoAlbum()
-				{
-					UserId = CurrentUser.Id,
-					Name = model.AlbumName,
-					Description = model.AlbumDescription,
-					CreationDate = DateTime.Now,
-					IsPrivate = model.IsPrivate
-				};
-				var tags = ParseTagString(model.Tags);
-				var information = SaveAlbumInformationInDB(album, tags);
+				UserId = CurrentUser.Id,
+				Name = model.AlbumName,
+				Description = model.AlbumDescription,
+				CreationDate = DateTime.Now,
+				IsPrivate = model.IsPrivate
+			};
+			var tags = ParseTagString(model.Tags);
+			var information = SaveAlbumInformationInDb(album, tags);
 
-				if (tags != null)
-				{
-					information.Tags = tags.Select(t => t.TagName).ToArray();
-				}
-				information.PresentationPhotoUrl = Url.Content("~/Content/Images/default-album-photo.png");
-
-				return Json(information);
+			if (tags != null)
+			{
+				information.Tags = tags.Select(t => t.TagName).ToArray();
 			}
-			return new EmptyResult();
+			information.PresentationPhotoUrl = Url.Content("~/Content/Images/default-album-photo.png");
+
+			return Json(information);
 		}
 
 		// GET: /Albums/Album/Id
@@ -54,7 +54,7 @@ namespace Memento.Controllers
 		{
 			ViewBag.CurrentUser = CurrentUser;
 
-			AlbumViewModel model = new AlbumViewModel() {
+			var model = new AlbumViewModel() {
 				AlbumId = 2,
 				AlbumName = "My favorite album.",
 				IsAlbumOfUser = true
@@ -77,7 +77,7 @@ namespace Memento.Controllers
 			photoInformation.Description = model.PhotoDescription;
 			photoInformation.CreationDate = DateTime.Now;
 		
-			PhotoDTO information = SavePhotoInformationInDB(photoInformation);
+			PhotoDTO information = SavePhotoInformationInDb(photoInformation);
 			information.IsEditable = true;
 
 			return Json(information);
@@ -86,8 +86,8 @@ namespace Memento.Controllers
 		#region Helpers
 		private Photo SavePhotoInUserDirectory(HttpPostedFileBase file)
 		{
-			Size smallSize = PhotoManager.GetThumbailSize(PhotoSize.Small);
-			Size mediumSize = PhotoManager.GetThumbailSize(PhotoSize.Standart);
+			var smallSize = PhotoManager.GetThumbailSize(PhotoSize.Small);
+			var mediumSize = PhotoManager.GetThumbailSize(PhotoSize.Standart);
 
 			string extention = Path.GetExtension(file.FileName);
 			ServerPath smallPhotoPath = HttpContext.GetFilePath(DirectoryType.PhotoDirectory, CurrentUser.UserName, extention);
@@ -114,7 +114,7 @@ namespace Memento.Controllers
 			};
 		}
 
-		private PhotoDTO SavePhotoInformationInDB(Photo information)
+		private PhotoDTO SavePhotoInformationInDb(Photo information)
 		{
 			try
 			{
@@ -141,23 +141,23 @@ namespace Memento.Controllers
 			{
 				return null;
 			}
-			string pattern = @"#(\w)+";
-			Regex tagRegex = new Regex(pattern);
-			var result = new List<AlbumTag>();
-			
-			foreach (var match in tagRegex.Matches(tagString))
-			{
-				result.Add(new AlbumTag() { TagName = match.ToString() });
-			}
-			return result;
+			const string pattern = @"#(\w)+";
+			var tagRegex = new Regex(pattern);
+
+			return (from object match 
+					in tagRegex.Matches(tagString) 
+					select new AlbumTag()
+					{
+						TagName = match.ToString()
+					}).ToList();
 		}
 
-		private PhotoAlbumDTO SaveAlbumInformationInDB(PhotoAlbum album, IEnumerable<AlbumTag> tags)
+		private PhotoAlbumDto SaveAlbumInformationInDb(PhotoAlbum album, IEnumerable<AlbumTag> tags)
 		{
 			try
 			{
 				album.Id = DataService.CreateAlbum(album, tags);
-				return album.ToPhotoAlbumDTO();
+				return album.ToPhotoAlbumDto();
 			}
 			catch (Exception e)
 			{

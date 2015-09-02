@@ -11,7 +11,9 @@
 .photo-description-textarea {
     width: 100%;
     max-width: 100%;
-
+    -moz-resize: none;
+    -ms-resize: none;
+    -o-resize: none;
     resize: none;
 
     margin: 10px 0;

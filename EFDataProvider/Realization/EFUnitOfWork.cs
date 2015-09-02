@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EFDataProvider.PhotoAlbumsDbContext;
 using Entities.Interfaces;
 
 namespace EFDataProvider.Realization
 {
 	public class EFUnitOfWork : IUnitOfWork
 	{
-		private PhotoAlbumsContext _context = null;
-		private IUserRepository _userRepository = null;
-		private IAlbumRepository _albumRepository = null;
-		private IPhotoRepository _photoRepository = null;
-		private IAlbumCommentRepository _albumCommentRepository = null;
-		private IPhotoCommentRepository _photoCommentRepository = null;
+		private readonly PhotoAlbumsContext _context;
+		private IUserRepository _userRepository;
+		private IAlbumRepository _albumRepository;
+		private IPhotoRepository _photoRepository;
+		private IAlbumCommentRepository _albumCommentRepository;
+		private IPhotoCommentRepository _photoCommentRepository;
 
 		private EFUnitOfWork() {}
 

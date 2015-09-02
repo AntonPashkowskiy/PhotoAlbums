@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Entities.Entities;
+using Memento.App_Start;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Memento.Models;
 using ServiceLayer;
-using Entities;
 using Memento.Environment.DataManagement;
 
 namespace Memento.Controllers

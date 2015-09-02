@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Entities;
+﻿using Entities.Entities;
 
-namespace Memento.DTO
+namespace Memento.DTO.Mappers
 {
 	public static class DTOMapperExtention
 	{
@@ -20,7 +16,7 @@ namespace Memento.DTO
 			};
 		}
 
-		public static PhotoAlbum ToPhotoAlbum(this PhotoAlbumDTO photoAlbumDto)
+		public static PhotoAlbum ToPhotoAlbum(this PhotoAlbumDto photoAlbumDto)
 		{
 			return new PhotoAlbum()
 			{

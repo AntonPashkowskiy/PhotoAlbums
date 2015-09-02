@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities;
+using EFDataProvider.PhotoAlbumsDbContext;
+using Entities.Entities;
 using Entities.Interfaces;
 
 namespace EFDataProvider.Realization
 {
 	class EFUserRepository : IUserRepository
 	{
-		private PhotoAlbumsContext _context = null;
+		private readonly PhotoAlbumsContext _context;
 
 		private EFUserRepository() { }
 		public EFUserRepository(PhotoAlbumsContext context)

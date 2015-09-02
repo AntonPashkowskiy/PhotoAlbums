@@ -1,12 +1,20 @@
 ﻿.rating {
     display: inline-block;
     vertical-align: middle;
+    -webkit-box-sizing: padding-box;
+    -moz-box-sizing: padding-box;
     box-sizing: padding-box;
-
+    
+    -moz-min-width: 60px;
+    -ms-min-width: 60px;
+    -o-min-width: 60px;
+    -webkit-min-width: 60px;
     min-width: 60px;
 
     padding: 5px;
     margin: 5px;
+
+    -ms-border-radius: 20px;
     border-radius: 20px;
 
     font-size: 20px;

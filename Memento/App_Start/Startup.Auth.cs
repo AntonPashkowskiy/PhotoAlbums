@@ -1,13 +1,12 @@
 ﻿using System;
+using Memento.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
-using Memento.Models;
 
-namespace Memento
+namespace Memento.App_Start
 {
     public partial class Startup
     {

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities;
+using Entities.Entities;
 using Entities.Interfaces;
 
 namespace ServiceLayer
 {
 	public class DataService : IDataService
 	{
-		private IUnitOfWork _unitOfWork = null;
+		private readonly IUnitOfWork _unitOfWork;
 
 		private DataService() {}
 
@@ -103,25 +101,25 @@ namespace ServiceLayer
 			{
 				case CommentType.AlbumComment:
 					var albumComment = _unitOfWork.AlbumComments.Get(commentId);
-					return albumComment != null ? albumComment.TargetAlbum.UserId == userId : false;
+					return albumComment != null && albumComment.TargetAlbum.UserId == userId;
 
 				case CommentType.PhotoComment:
 				default:
 					var photoComment = _unitOfWork.PhotoComments.Get(commentId);
-					return photoComment != null ? photoComment.TargetPhoto.AuthorId == userId : false;
+					return photoComment != null && photoComment.TargetPhoto.AuthorId == userId;
 			}
 		}
 
 		public bool CheckPossibilityOfChangingPhoto(string userId, int photoId)
 		{
 			var photo = _unitOfWork.Photo.Get(photoId);
-			return photo != null ? photo.AuthorId == userId : false;
+			return photo != null && photo.AuthorId == userId;
 		}
 
 		public bool CheckPossibilityOfChangingAlbum(string userId, int albumId)
 		{
 			var album = _unitOfWork.Albums.Get(albumId);
-			return album != null ? album.UserId == userId : false;
+			return album != null && album.UserId == userId;
 		}
 
 		public void DeleteAlbum(int albumId)
@@ -190,7 +188,7 @@ namespace ServiceLayer
 
 		public UserStatistic GetUserStatistic(string userId)
 		{
-			return new UserStatistic()
+			return new UserStatistic
 			{
 				NumberOfAlbums = _unitOfWork.Albums.NumberOfAlbums(userId),
 				NumberOfPhotos = _unitOfWork.Photo.NumberOfPhotos(userId),

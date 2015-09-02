@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Memento.DTO
+﻿namespace Memento.DTO
 {
-	public class PhotoAlbumDTO
+	public class PhotoAlbumDto
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }

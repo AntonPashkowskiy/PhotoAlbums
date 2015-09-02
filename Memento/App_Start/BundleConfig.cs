@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace Memento
+namespace Memento.App_Start
 {
 	public class BundleConfig
 	{
@@ -17,28 +16,31 @@ namespace Memento
 			bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include(
 						"~/Scripts/jquery.unobtrusive-ajax.js"));
 
-			// Use the development version of Modernizr to develop with and learn from. Then, when you're
-			// ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
 			bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
 						"~/Scripts/modernizr-*"));
 
 			bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-					  "~/Scripts/bootstrap.js",
-					  "~/Scripts/respond.js"));
+					    "~/Scripts/bootstrap.js",
+					    "~/Scripts/respond.js"));
 
 			bundles.Add(new ScriptBundle("~/bundles/fileinput").Include(
-					  "~/Scripts/fileinput.min.js"));
+					    "~/Scripts/fileinput.min.js"));
 
 			bundles.Add(new ScriptBundle("~/bundles/angular").Include(
 						"~/Scripts/angular.min.js",
+						"~/Scripts/angular-loader.min.js",
 						"~/Scripts/angular-route.min.js",
-						"~/Scripts/angular-loader.min.js"));
+						"~/Scripts/app.js",
+						"~/Scripts/AngularControllers/*.js",
+						"~/Scripts/AngularDirectives/*.js",
+						"~/Scripts/AngularServices/*.js"));
 
 			bundles.Add(new ScriptBundle("~/bundles/custom-scripts").Include(
 					    "~/Scripts/CustomScripts/*.js"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(
-					  "~/Content/CSS/*.css"));
+					    "~/Content/CSS/*.css",
+						"~/Content/bootstrap-fileinput/css/fileinput.min.css"));
 		}
 	}
 }

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Memento.App_Start;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Memento.Models;
 using ServiceLayer;
@@ -124,10 +123,7 @@ namespace Memento.Controllers
         }
 	
 		#region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        private IAuthenticationManager AuthenticationManager
+	    private IAuthenticationManager AuthenticationManager
         {
             get
             {

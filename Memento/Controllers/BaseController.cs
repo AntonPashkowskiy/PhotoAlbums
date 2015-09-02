@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Memento.App_Start;
 using Memento.Models;
 using ServiceLayer;
 using Microsoft.AspNet.Identity;
@@ -12,7 +11,6 @@ namespace Memento.Controllers
 {
 	public class BaseController : Controller
 	{
-		private IDataService _dataService;
 		private ApplicationSignInManager _signInManager;
 		private ApplicationUserManager _userManager;
 		private ApplicationUser _currentUser;
@@ -23,7 +21,7 @@ namespace Memento.Controllers
 			{
 				throw new ArgumentNullException("Data service object can't be null.");
 			}
-			_dataService = dataService;
+			DataService = dataService;
 		}
 
 		public BaseController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IDataService dataService)
@@ -37,27 +35,13 @@ namespace Memento.Controllers
 			DataService = dataService;
 		}
 
-		protected IDataService DataService 
-		{ 
-			get
-			{
-				return _dataService;
-			}
-			private set
-			{
-				_dataService = value;
-			}
-		}
+		protected IDataService DataService { get; private set; }
 
 		public ApplicationUser CurrentUser
 		{
 			get
 			{
-				if (_currentUser == null)
-				{
-					_currentUser = UserManager.FindById(User.Identity.GetUserId());
-				}
-				return _currentUser;
+				return _currentUser ?? (_currentUser = UserManager.FindById(User.Identity.GetUserId()));
 			}
 		}
 

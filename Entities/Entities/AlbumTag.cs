@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Entities
+namespace Entities.Entities
 {
-	public partial class AlbumTag
+	public class AlbumTag
 	{
 		public int Id { get; set; }
 		public string TagName { get; set; }
+
+		// navigation property for Entity Framework
+		public virtual ICollection<PhotoAlbum> Albums { get; set; }
 	}
 }

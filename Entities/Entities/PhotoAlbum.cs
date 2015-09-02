@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Entities
+namespace Entities.Entities
 {
-	public partial class PhotoAlbum
+	public class PhotoAlbum
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
@@ -15,5 +12,11 @@ namespace Entities
 		public string Description { get; set; }
 		public DateTime CreationDate { get; set; }
 		public bool IsPrivate { get; set; }
+
+		// navigation properties for Entity Framework
+		public virtual User AlbumUser { get; set; }
+		public virtual ICollection<AlbumTag> Tags { get; set; }
+		public virtual ICollection<Photo> Photo { get; set; }
+		public virtual ICollection<AlbumComment> Comments { get; set; }
 	}
 }

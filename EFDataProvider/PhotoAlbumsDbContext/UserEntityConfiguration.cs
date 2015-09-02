@@ -1,49 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 using Entities;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Entities.Entities;
 
-namespace EFDataProvider
+namespace EFDataProvider.PhotoAlbumsDbContext
 {
 	class UserEntityConfiguration : EntityTypeConfiguration<User>
 	{
 		public UserEntityConfiguration()
 		{
-			this.ToTable("UserInfo");
-			this.HasKey<string>(u => u.Id);
+			ToTable("UserInfo");
+			HasKey(u => u.Id);
 
-			this.Property(u => u.FirstName)
+			Property(u => u.FirstName)
 				.IsRequired();
 
-			this.Property(u => u.LastName)
+			Property(u => u.LastName)
 				.IsRequired();
 
-			this.Property(u => u.Email)
+			Property(u => u.Email)
 				.IsRequired();
 
 			// Foreign keys configuration
-			this.HasMany(u => u.PhotoAlbums)
+			HasMany(u => u.PhotoAlbums)
 				.WithRequired(a => a.AlbumUser)
-				.HasForeignKey<string>(a => a.UserId);
+				.HasForeignKey(a => a.UserId);
 
-			this.HasMany(u => u.PublishedPhoto)
+			HasMany(u => u.PublishedPhoto)
 				.WithRequired(p => p.Author)
-				.HasForeignKey<string>(p => p.AuthorId)
+				.HasForeignKey(p => p.AuthorId)
 				.WillCascadeOnDelete(false);
 
-			this.HasMany(u => u.CommentsOfPhoto)
+			HasMany(u => u.CommentsOfPhoto)
 				.WithRequired(c => c.Author)
-				.HasForeignKey<string>(c => c.AuthorId)
+				.HasForeignKey(c => c.AuthorId)
 				.WillCascadeOnDelete(false);
 
-			this.HasMany(u => u.CommnetsOfAlbums)
+			HasMany(u => u.CommnetsOfAlbums)
 				.WithRequired(c => c.Author)
-				.HasForeignKey<string>(c => c.AuthorId)
+				.HasForeignKey(c => c.AuthorId)
 				.WillCascadeOnDelete(false);
 		}
 	}

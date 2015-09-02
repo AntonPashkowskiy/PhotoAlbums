@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities;
+﻿using System.Data.Entity;
+using Entities.Entities;
 
-namespace EFDataProvider
+namespace EFDataProvider.PhotoAlbumsDbContext
 {
 	class PhotoAlbumsContext : DbContext
 	{

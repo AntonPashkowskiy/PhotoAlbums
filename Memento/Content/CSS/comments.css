@@ -8,6 +8,9 @@
 
 .comment-textarea {
     max-width: initial;
+    -moz-resize: none;
+    -ms-resize: none;
+    -o-resize: none;
     resize: none;
 }
 

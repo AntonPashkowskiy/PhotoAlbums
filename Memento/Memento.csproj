@@ -221,7 +221,7 @@
     <Compile Include="Models\PersonalRoomViewModel.cs" />
     <Compile Include="Models\UploadingPhotoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="App_Start\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
@@ -260,6 +260,22 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\AngularControllers\albumsController.js" />
+    <Content Include="Scripts\AngularControllers\albumContentController.js" />
+    <Content Include="Scripts\AngularControllers\avatarUploadingController.js" />
+    <Content Include="Scripts\AngularControllers\currentPhotoController.js" />
+    <Content Include="Scripts\AngularControllers\photosPaginationController.js" />
+    <Content Include="Scripts\AngularControllers\searchController.js" />
+    <Content Include="Scripts\AngularDirectives\albumDirective.js" />
+    <Content Include="Scripts\AngularDirectives\commentDirective.js" />
+    <Content Include="Scripts\AngularDirectives\itemOfAlbumDirective.js" />
+    <Content Include="Scripts\AngularDirectives\photoDirective.js" />
+    <Content Include="Scripts\AngularDirectives\searchResultDirective.js" />
+    <Content Include="Scripts\AngularServices\albumsService.js" />
+    <Content Include="Scripts\AngularServices\photosService.js" />
+    <Content Include="Scripts\AngularServices\searchService.js" />
+    <Content Include="Scripts\AngularServices\updateService.js" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\CustomScripts\avatarUploading.js" />
@@ -318,8 +334,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\AngularControllers\" />
-    <Folder Include="Scripts\AngularServices\" />
+    <Folder Include="Scripts\AngularDirectives\Templates\" />
     <Folder Include="UserData\" />
     <Folder Include="Views\BaseApi\" />
     <Folder Include="Views\Comment\" />

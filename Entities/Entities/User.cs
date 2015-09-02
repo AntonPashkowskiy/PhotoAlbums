@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Entities
+namespace Entities.Entities
 {
-	public partial class User
+	public class User
 	{
 		public string Id { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
 		public string Email { get; set; }
+
+		// navigation properties for Entity Framework
+		public virtual ICollection<PhotoAlbum> PhotoAlbums { get; set; }
+		public virtual ICollection<Photo> PublishedPhoto { get; set; }
+		public virtual ICollection<AlbumComment> CommnetsOfAlbums { get; set; }
+		public virtual ICollection<PhotoComment> CommentsOfPhoto { get; set; }
 	}
 }

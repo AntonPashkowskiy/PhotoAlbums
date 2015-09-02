@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Entities;
+﻿using Entities.Entities;
 
-namespace Memento.DTO
+namespace Memento.DTO.Mappers
 {
 	public static class EntitiesMapperExtention
 	{
@@ -21,9 +17,9 @@ namespace Memento.DTO
 			};
 		}
 
-		public static PhotoAlbumDTO ToPhotoAlbumDTO(this PhotoAlbum album)
+		public static PhotoAlbumDto ToPhotoAlbumDto(this PhotoAlbum album)
 		{
-			return new PhotoAlbumDTO()
+			return new PhotoAlbumDto()
 			{
 				Id = album.Id,
 				Name = album.Name,
@@ -32,7 +28,7 @@ namespace Memento.DTO
 			};
 		}
 
-		public static CommentDTO ToCommentDTO(this PhotoComment comment)
+		public static CommentDTO ToCommentDto(this PhotoComment comment)
 		{
 			return new CommentDTO()
 			{
@@ -45,7 +41,7 @@ namespace Memento.DTO
 			};
 		}
 
-		public static CommentDTO ToCommentDTO(this AlbumComment comment)
+		public static CommentDTO ToCommentDto(this AlbumComment comment)
 		{
 			return new CommentDTO()
 			{

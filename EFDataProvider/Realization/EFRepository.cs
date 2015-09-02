@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Data.Entity;
-using System.Threading.Tasks;
+using EFDataProvider.PhotoAlbumsDbContext;
 using Entities.Interfaces;
 
 namespace EFDataProvider.Realization
 {
 	class EFRepository<TEntity> : IRepository<TEntity> where TEntity : class
 	{
-		private PhotoAlbumsContext _context = null;
+		private PhotoAlbumsContext _context;
 
 		private EFRepository() {}
 
@@ -62,7 +61,6 @@ namespace EFDataProvider.Realization
 
 		public virtual void Update(TEntity item)
 		{
-			return;
 		}
 
 		public void Delete(int id)

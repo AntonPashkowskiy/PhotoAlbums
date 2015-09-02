@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using Entities;
+using Entities.Entities;
 using Memento.DTO;
+using Memento.DTO.Mappers;
 using ServiceLayer;
 
 namespace Memento.Controllers.API
@@ -19,34 +17,34 @@ namespace Memento.Controllers.API
 
 		[Route("api/albums/own")]
 		[HttpGet]
-		public IEnumerable<PhotoAlbumDTO> GetAlbums()
+		public IEnumerable<PhotoAlbumDto> GetAlbums()
 		{
 			return DataService.GetAlbums(CurrentUserId)
 							  .Where(a => !a.IsPrivate)
-							  .Select(a => a.ToPhotoAlbumDTO());
+							  .Select(a => a.ToPhotoAlbumDto());
 		}
 
 		[Route("api/albums/tag/{tag}")]
 		[HttpGet]
-		public IEnumerable<PhotoAlbumDTO> GetAlbumsByTag(string tag)
+		public IEnumerable<PhotoAlbumDto> GetAlbumsByTag(string tag)
 		{
 			return DataService.GetAlbums(new AlbumTag() { TagName = tag })
 							  .Where(a => !a.IsPrivate)
-							  .Select(a => a.ToPhotoAlbumDTO());
+							  .Select(a => a.ToPhotoAlbumDto());
 		}
 
 		[Route("api/albums/name/{fullName}")]
 		[HttpGet]
-		public IEnumerable<PhotoAlbumDTO> GetAlbumsByName(string fullName)
+		public IEnumerable<PhotoAlbumDto> GetAlbumsByName(string fullName)
 		{
 			return DataService.GetAlbumsByName(fullName)
 							  .Where(a => !a.IsPrivate)
-							  .Select(a => a.ToPhotoAlbumDTO());
+							  .Select(a => a.ToPhotoAlbumDto());
 		}
 
 		[Route("api/albums/update")]
 		[HttpPut]
-		public void UpdateAlbum(PhotoAlbumDTO album)
+		public void UpdateAlbum(PhotoAlbumDto album)
 		{
 			bool isOwnerOfAlbum = DataService.CheckPossibilityOfChangingAlbum(CurrentUserId, album.Id);
 

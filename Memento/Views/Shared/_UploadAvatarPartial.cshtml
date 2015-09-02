@@ -1,20 +1,26 @@
-﻿<div id="upload-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+﻿<div id="upload-modal"
+     class="modal fade"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    
     @using (Ajax.BeginForm("UploadAvatar", "Manage",
     null,
     new AjaxOptions
     {
         HttpMethod = "POST",
-        OnSuccess = "AvatarUploading.onSuccess",
+        OnSuccess = "AvatarUploading.analyseData",
         OnFailure = "AvatarUploading.onFailure"
-    }, 
-    new 
-    { 
+    },
+    new
+    {
         id = "UploadForm",
-        enctype = "multipart/form-data" 
+        enctype = "multipart/form-data"
     }))
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,7 +28,7 @@
                     <h3>Avatar uploading</h3>
                 </div>
                 <div class="modal-body">
-                    @Html.Partial("_InputFilePartial")  
+                    @Html.Partial("_InputFilePartial")
                 </div>
             </div>
         </div>

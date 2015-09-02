@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Entities
+namespace Entities.Entities
 {
-	public partial class Photo
+	public class Photo
 	{
 		public int Id { get; set; }
 		public string SmallPhotoUrl { get; set; }
@@ -17,5 +14,10 @@ namespace Entities
 		public DateTime CreationDate { get; set; }
 		public string AuthorId { get; set; }
 		public int AlbumId { get; set; }
+
+		// navigation properties for Entity Framework
+		public virtual PhotoAlbum PhotoAlbum { get; set; }
+		public virtual User Author { get; set; }
+		public virtual ICollection<PhotoComment> Comments { get; set; }
 	}
 }
